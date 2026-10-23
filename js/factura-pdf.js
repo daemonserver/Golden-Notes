@@ -21,6 +21,41 @@ var GN = (function (modulo) {
       String(fecha.getDate()).padStart(2, "0") + "-" + String(Math.floor(Math.random() * 900) + 100);
   }
 
+  function marcaTiempo(fecha) {
+    function dosDigitos(valor) { return String(valor).padStart(2, "0"); }
+    return fecha.getFullYear() + dosDigitos(fecha.getMonth() + 1) + dosDigitos(fecha.getDate()) + "-" +
+      dosDigitos(fecha.getHours()) + dosDigitos(fecha.getMinutes()) + dosDigitos(fecha.getSeconds());
+  }
+
+  function cargarLogo() {
+    return new Promise(function (resolve, reject) {
+      var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">' +
+        '<defs><linearGradient id="oro" x1="16" y1="14" x2="49" y2="51" gradientUnits="userSpaceOnUse">' +
+        '<stop offset="0" stop-color="#e8cf7a"/><stop offset=".52" stop-color="#c9a227"/>' +
+        '<stop offset="1" stop-color="#a8842a"/></linearGradient>' +
+        '<linearGradient id="brillo" x1="21" y1="25" x2="31" y2="45" gradientUnits="userSpaceOnUse">' +
+        '<stop stop-color="#fff8dc" stop-opacity=".9"/><stop offset="1" stop-color="#fff8dc" stop-opacity=".08"/>' +
+        '</linearGradient></defs><path d="M32 5.5C27.8 12.6 15 28.2 15 40a17 17 0 1 0 34 0C49 28.2 36.2 12.6 32 5.5Z" ' +
+        'fill="url(#oro)" stroke="#e8cf7a" stroke-width="1.2" stroke-linejoin="round"/>' +
+        '<path d="M25.8 26.2c-3.4 5-5.2 9.3-5.2 13.7 0 3.2 1.1 6.1 3 8.4" ' +
+        'stroke="url(#brillo)" stroke-width="2.2" stroke-linecap="round"/></svg>';
+      var imagen = new Image();
+      imagen.onload = function () {
+        try {
+          var canvas = document.createElement("canvas");
+          canvas.width = 128;
+          canvas.height = 128;
+          canvas.getContext("2d").drawImage(imagen, 0, 0, 128, 128);
+          resolve(canvas.toDataURL("image/png"));
+        } catch (error) {
+          resolve(null);
+        }
+      };
+      imagen.onerror = function () { resolve(null); };
+      imagen.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+    });
+  }
+
   function textoPedido(renglones, cliente) {
     var lineas = ["*Pedido — " + NEGOCIO.nombre + "*", ""];
     renglones.forEach(function (r, i) {
@@ -50,6 +85,7 @@ var GN = (function (modulo) {
       return GN.avisar("No se pudo cargar el generador de PDF. Revisa tu conexión a internet.", "error");
     }
 
+    cargarLogo().then(function (logo) {
     var doc = new window.jspdf.jsPDF({ unit: "mm", format: "letter" });
     var fecha = new Date();
     var cliente = obtenerCliente();
@@ -63,19 +99,24 @@ var GN = (function (modulo) {
 
     function encabezadoPagina(continuacion) {
       doc.setFillColor(18, 20, 25);
-      doc.rect(0, 0, ancho, 34, "F");
+      doc.rect(0, 0, ancho, 38, "F");
+      doc.setFillColor(201, 162, 39);
+      doc.rect(0, 37, ancho, 1, "F");
+      if (logo) doc.addImage(logo, "PNG", margen, 7, 23, 23);
       doc.setTextColor(232, 207, 122);
       doc.setFont("times", "bold");
-      doc.setFontSize(22);
-      doc.text(NEGOCIO.nombre, margen, 16);
+      doc.setFontSize(25);
+      doc.text(NEGOCIO.nombre, margen + 28, 16);
       doc.setFont("helvetica", "normal");
-      doc.setFontSize(8.5);
+      doc.setFontSize(8);
       doc.setTextColor(245, 245, 245);
-      doc.text(NEGOCIO.telefono + " · " + NEGOCIO.correo, ancho - margen, 15, { align: "right" });
-      doc.text(NEGOCIO.pais, ancho - margen, 21, { align: "right" });
-      doc.setFontSize(9);
-      doc.text(continuacion ? "COTIZACIÓN · CONTINUACIÓN" : "COTIZACIÓN DE PEDIDO", margen, 26);
-      y = 43;
+      doc.text(NEGOCIO.telefono, ancho - margen, 13, { align: "right" });
+      doc.text(NEGOCIO.correo, ancho - margen, 18, { align: "right" });
+      doc.text(NEGOCIO.pais, ancho - margen, 23, { align: "right" });
+      doc.setFontSize(8.5);
+      doc.setTextColor(232, 207, 122);
+      doc.text(continuacion ? "COTIZACIÓN · CONTINUACIÓN" : "COTIZACIÓN DE PEDIDO", margen + 28, 23);
+      y = 47;
     }
 
     function nuevaPagina() {
@@ -120,17 +161,6 @@ var GN = (function (modulo) {
     doc.text("Fecha: " + GN.textoFecha(fecha), ancho - margen, y, { align: "right" });
     y += 8;
 
-    var campos = [["Nombre", cliente.nombre], ["Teléfono", cliente.telefono],
-      ["Correo", cliente.correo], ["Dirección", cliente.direccion], ["Nota", cliente.nota]];
-    if (campos.some(function (campo) { return !!campo[1]; })) {
-      doc.setFont("helvetica", "bold");
-      doc.setFontSize(10);
-      doc.text("Datos del cliente", margen, y);
-      y += 5;
-      campos.forEach(function (campo) { escribirCampo(campo[0], campo[1]); });
-      y += 2;
-    }
-
     cabeceraTabla();
     renglones.forEach(function (r, i) {
       var nombre = doc.splitTextToSize(r.nombre + " — " + r.disenador, 78);
@@ -173,12 +203,31 @@ var GN = (function (modulo) {
     doc.text("TOTAL", ancho - margen - 64, y + 2.5);
     doc.text(GN.formatearPrecio(total), ancho - margen - 3, y + 2.5, { align: "right" });
 
+    y += 18;
+    var campos = [["Nombre", cliente.nombre], ["Teléfono", cliente.telefono],
+      ["Correo", cliente.correo], ["Dirección", cliente.direccion], ["Nota", cliente.nota]];
+    if (campos.some(function (campo) { return !!campo[1]; })) {
+      asegurarEspacio(22);
+      doc.setDrawColor(225, 220, 208);
+      doc.line(margen, y, ancho - margen, y);
+      y += 7;
+      doc.setFont("times", "bold");
+      doc.setFontSize(13);
+      doc.setTextColor(35, 35, 35);
+      doc.text("Datos del cliente", margen, y);
+      y += 7;
+      campos.forEach(function (campo) { escribirCampo(campo[0], campo[1]); });
+    }
+
     doc.setFont("helvetica", "normal");
     doc.setFontSize(7.5);
     doc.setTextColor(115, 115, 115);
     doc.text(doc.splitTextToSize(NEGOCIO.notaFactura, anchoUtil), margen, alto - 13);
-    doc.save("golden-notes-" + orden.toLowerCase() + ".pdf");
+    doc.save("golden-notes-" + marcaTiempo(fecha) + ".pdf");
     GN.avisar("Cotización PDF descargada correctamente.");
+    }).catch(function () {
+      GN.avisar("No se pudo generar la cotización. Inténtalo de nuevo.", "error");
+    });
   }
 
   modulo.generarFacturaPDF = generarFacturaPDF;
