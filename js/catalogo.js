@@ -92,6 +92,9 @@ var GN = (function (modulo) {
 
     var orden = estado.orden;
     lista.sort(function (a, b) {
+      // Mantiene los perfumes no disponibles al final con cualquier orden.
+      if (a.noDisponible === true && b.noDisponible !== true) return 1;
+      if (a.noDisponible !== true && b.noDisponible === true) return -1;
       if (orden === "nombre-asc") return a.nombre.localeCompare(b.nombre, "es");
       if (orden === "nombre-desc") return b.nombre.localeCompare(a.nombre, "es");
       if (orden === "precio-asc") return GN.precioMinimo(a) - GN.precioMinimo(b);
