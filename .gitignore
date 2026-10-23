@@ -1,0 +1,75 @@
+# ================= Golden Notes — archivos ignorados por Git =================
+# Guía completa de seguridad: docs/SEGURIDAD-GITHUB.md
+
+# ---- NUNCA SUBIR: credenciales y secretos ----
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.der
+id_rsa*
+id_ed25519*
+*.ppk
+credentials*
+secreto*
+token*
+.netrc
+.git-credentials
+
+# ---- NUNCA SUBIR: respaldos y datos sensibles ----
+*.sql
+*.sqlite
+*.sqlite3
+*.bak
+*.backup
+*.zip
+*.rar
+*.7z
+*.tar.gz
+backup/
+respaldo/
+facturas-exportadas/
+*.pdf
+
+# ---- Datos personales de clientes ----
+clientes/
+reportes-clientes/
+docs/
+
+# ---- Carpeta original de imágenes (las usadas viven en img/) ----
+Perfumes disponibles/
+
+# ---- Sistema operativo ----
+Thumbs.db
+ehthumbs.db
+desktop.ini
+Desktop.ini
+.DS_Store
+._*
+
+# ---- Editores / IDE ----
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ---- Dependencias y compilaciones (si se usan en el futuro) ----
+node_modules/
+dist/
+build/
+.cache/
+.parcel-cache/
+
+# ---- Logs y temporales ----
+*.log
+npm-debug.log*
+*.tmp
+*.temp
+~$*
+
+# ---- Servidor local de pruebas ----
+__pycache__/
+.prueba*

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  IMPORTANTE: reemplaza "daemonserver" por tu usuario de GitHub (o el dominio propio)
+  antes de publicar. Ejemplo: https://hectoc.github.io/golden-notes/
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://daemonserver.github.io/golden-notes/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://daemonserver.github.io/golden-notes/paginas/catalogo.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://daemonserver.github.io/golden-notes/paginas/disenador.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://daemonserver.github.io/golden-notes/paginas/origen-y-compra.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://daemonserver.github.io/golden-notes/paginas/carrito.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://daemonserver.github.io/golden-notes/paginas/contacto.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+</urlset>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es" data-tema="claro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Golden Notes — Perfumería de autor en Guatemala. Catálogo de perfumes de hombre y mujer con pirámide olfativa, acordes y compra fácil por WhatsApp.">
+  <meta name="theme-color" content="#c9a227">
+  <title>Golden Notes — Perfumería de diseñador</title>
+  <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+  <link href="css/fuentes-locales.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/componentes.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/animaciones.css">
+  <script src="js/tema-init.js"></script>
+</head>
+<body>
+  <div class="fondo-aurora" aria-hidden="true"><span></span></div>
+
+  <!-- ===================== ENCABEZADO ===================== -->
+  <header class="encabezado" data-encabezado>
+    <div class="contenedor encabezado__interior">
+      <a class="logo" href="index.html" aria-label="Golden Notes — inicio">
+        <img class="logo__marca" src="img/favicon.svg" alt="" width="40" height="40">
+        <span class="logo__texto">
+          <span class="logo__nombre">Golden Notes</span>
+          <span class="logo__lema">Perfumería de diseñador</span>
+        </span>
+      </a>
+
+      <nav class="nav nav--escritorio" aria-label="Navegación principal">
+        <ul class="nav__lista">
+          <li><a class="nav__enlace" data-nav href="index.html">Inicio</a></li>
+          <li><a class="nav__enlace" data-nav href="paginas/catalogo.html">Catálogo</a></li>
+          <li><a class="nav__enlace" data-nav href="paginas/disenador.html">Diseñadores</a></li>
+          <li><a class="nav__enlace" data-nav href="paginas/origen-y-compra.html">Origen</a></li>
+          <li><a class="nav__enlace" data-nav href="paginas/contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
+
+      <div class="acciones">
+        <button class="btn btn--icono" type="button" data-tema-toggle aria-pressed="false" aria-label="Cambiar a modo oscuro">
+          <span data-tema-icono aria-hidden="true">☾</span>
+        </button>
+        <a class="btn btn--icono enlace-carrito" href="paginas/carrito.html" aria-label="Ver carrito de compras">
+          <span aria-hidden="true">🛒</span>
+          <span class="contador-carrito" data-contador-carrito>0</span>
+        </a>
+        <button class="hamburguesa" type="button" data-hamburguesa aria-label="Abrir menú" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="menu-movil" data-menu-movil aria-label="Menú móvil">
+    <a class="nav__enlace" data-nav href="index.html">Inicio</a>
+    <a class="nav__enlace" data-nav href="paginas/catalogo.html">Catálogo</a>
+    <a class="nav__enlace" data-nav href="paginas/disenador.html">Diseñadores</a>
+    <a class="nav__enlace" data-nav href="paginas/origen-y-compra.html">Origen</a>
+    <a class="nav__enlace" data-nav href="paginas/contacto.html">Contacto</a>
+    <a class="nav__enlace" data-nav href="paginas/carrito.html">Carrito</a>
+  </nav>
+
+  <main>
+    <!-- ===================== HÉROE ===================== -->
+    <section class="hero">
+      <div class="contenedor hero__rejilla">
+        <div class="hero__contenido">
+          <span class="etiqueta etiqueta--oro">✦ Colección 2026</span>
+          <h1 class="hero__titulo">Tu huella, hecha <em>perfume</em></h1>
+          <p class="hero__texto">
+            Descubre fragancias de diseñador. Explora su pirámide olfativa, sus acordes y construye tu firma olfativa con Golden Notes.
+          </p>
+
+          <div class="hero__acciones">
+            <a class="btn btn--oro" href="paginas/catalogo.html">Explorar catálogo</a>
+            <a class="btn btn--fantasma" href="paginas/disenador.html">Ver por diseñador</a>
+          </div>
+
+          <div class="hero__datos">
+            <div class="dato">
+              <p class="dato__valor" data-estadistica="total">80</p>
+              <p class="dato__etiqueta">Fragancias</p>
+            </div>
+            <div class="dato">
+              <p class="dato__valor" data-estadistica="disenadores">36</p>
+              <p class="dato__etiqueta">Diseñadores</p>
+            </div>
+            <div class="dato">
+              <p class="dato__valor">2</p>
+              <p class="dato__etiqueta">Tamaños: 50 / 100 ml</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero__vitrina" data-vitrina aria-label="Fragancias destacadas"></div>
+      </div>
+    </section>
+
+    <!-- ===================== CATEGORÍAS ===================== -->
+    <section class="seccion">
+      <div class="contenedor">
+        <div class="seccion__cabecera revelar">
+          <div>
+            <p class="seccion__ojo">Explora</p>
+            <h2>Encuentra tu fragancia</h2>
+            <p>Busca por nombre, agrupa por diseñador o filtra por género y familia olfativa.</p>
+          </div>
+          <a class="btn btn--contorno" href="paginas/catalogo.html">Ver todo</a>
+        </div>
+
+        <div class="pasos">
+          <a class="paso revelar" href="paginas/catalogo.html?genero=hombre" style="--retardo:0s">
+            <h3>Hombre</h3>
+            <p>Frescas, amaderadas y con carácter. Fragancias que marcan presencia.</p>
+          </a>
+          <a class="paso revelar" href="paginas/catalogo.html?genero=mujer" style="--retardo:0.1s">
+            <h3>Mujer</h3>
+            <p>Florales, dulces y envolventes. De la elegancia clásica a la modernidad.</p>
+          </a>
+          <a class="paso revelar" href="paginas/disenador.html" style="--retardo:0.2s">
+            <h3>Por diseñador</h3>
+            <p>Chanel, Dior, Versace, Carolina Herrera y muchas casas más.</p>
+          </a>
+          <a class="paso revelar" href="paginas/carrito.html" style="--retardo:0.3s">
+            <h3>Tu carrito</h3>
+            <p>Arma tu pedido y envíame tu solicitud en PDF por WhatsApp.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== DESTACADOS ===================== -->
+    <section class="seccion">
+      <div class="contenedor">
+        <div class="seccion__cabecera revelar">
+          <div>
+            <p class="seccion__ojo">Selección</p>
+            <h2>Fragancias destacadas</h2>
+            <p>Las favoritas en tendencia; clásicos que nunca fallan y novedades que enamoran.</p>
+          </div>
+          <a class="btn btn--contorno" href="paginas/catalogo.html">Catálogo completo</a>
+        </div>
+
+        <div class="rejilla-perfumes" data-destacados></div>
+      </div>
+    </section>
+
+    <!-- ===================== CÓMO COMPRAR ===================== -->
+    <section class="seccion">
+      <div class="contenedor">
+        <div class="seccion__cabecera revelar">
+          <div>
+            <p class="seccion__ojo">Así de fácil</p>
+            <h2>Cómo comprar</h2>
+            <p>Sin registros complicados: arma tu pedido y ciérralo por WhatsApp.</p>
+          </div>
+        </div>
+
+        <div class="pasos">
+          <div class="paso revelar" style="--retardo:0s">
+            <h3>Elige tu perfume</h3>
+            <p>Revisa la ficha completa: acordes, notas y pirámide olfativa.</p>
+          </div>
+          <div class="paso revelar" style="--retardo:0.1s">
+            <h3>Selecciona el tamaño</h3>
+            <p>Disponible en 50 ml y 100 ml, también puedes cambiarlo en el carrito.</p>
+          </div>
+          <div class="paso revelar" style="--retardo:0.2s">
+            <h3>Añade al carrito</h3>
+            <p>Ajusta cantidades y obtén el total estimado al instante.</p>
+          </div>
+          <div class="paso revelar" style="--retardo:0.3s">
+            <h3>Cierra tu pedido</h3>
+            <p>Descarga la solicitud en PDF y envíala directo por WhatsApp.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== LLAMADA FINAL ===================== -->
+    <section class="seccion">
+      <div class="contenedor">
+        <div class="llamada revelar">
+          <p class="seccion__ojo">Golden Notes</p>
+          <h2>¿Listo para encontrar tu próxima fragancia?</h2>
+          <p>
+            Escríbenos por WhatsApp al <strong>+502 4134 1846</strong> o al correo
+            <strong>hectorpineda.em@gmail.com</strong> y te asesoramos sin compromiso.
+          </p>
+          <div class="hero__acciones">
+            <a class="btn btn--oro" href="https://wa.me/50241341846" target="_blank" rel="noopener">Escríbeme por WhatsApp</a>
+            <a class="btn btn--fantasma" href="paginas/contacto.html">Ver mi contacto</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== PIE ===================== -->
+  <footer class="pie">
+    <div class="contenedor">
+      <div class="pie__interior">
+        <div class="pie__marca">
+          <a class="logo" href="index.html">
+            <img class="logo__marca" src="img/favicon.svg" alt="" width="40" height="40">
+            <span class="logo__texto">
+              <span class="logo__nombre">Golden Notes</span>
+              <span class="logo__lema">Perfumería de diseñador</span>
+            </span>
+          </a>
+          <p>Fragancias seleccionadas con mimo, para quienes entienden que un perfume es parte de la identidad.</p>
+        </div>
+
+        <div>
+          <h4>Explorar</h4>
+          <ul class="pie__lista">
+            <li><a href="paginas/catalogo.html">Catálogo completo</a></li>
+            <li><a href="paginas/disenador.html">Por diseñador</a></li>
+            <li><a href="paginas/carrito.html">Mi carrito</a></li>
+            <li><a href="paginas/contacto.html">Contacto</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Categorías</h4>
+          <ul class="pie__lista">
+            <li><a href="paginas/catalogo.html?genero=hombre">Perfumes de caballero</a></li>
+            <li><a href="paginas/catalogo.html?genero=mujer">Perfumes de dama</a></li>
+            <li><a href="paginas/catalogo.html?orden=precio-asc">Mejor precio</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Contacto</h4>
+          <ul class="pie__lista">
+            <li><a href="tel:+50241341846">+502 4134 1846</a></li>
+            <li><a href="mailto:hectorpineda.em@gmail.com">hectorpineda.em@gmail.com</a></li>
+            <li><span>Lunes a viernes, en horario flexible.</span></li>
+          </ul>
+          <div class="pie__redes">
+            <a class="pie__red" href="https://wa.me/50241341846" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+            <a class="pie__red" href="mailto:hectorpineda.em@gmail.com" aria-label="Correo electrónico">✉</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="pie__inferior">
+        <span>© <span data-anio></span> Golden Notes. Todos los derechos reservados.</span>
+        <span>Hecho con dedicación en Guatemala 🇬🇹</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/datos.js" defer></script>
+  <script src="js/utilidades.js" defer></script>
+  <script src="js/carrito.js" defer></script>
+  <script src="js/tarjetas.js" defer></script>
+  <script src="js/modal-detalle.js" defer></script>
+  <script src="js/navegacion.js" defer></script>
+  <script src="js/portada.js" defer></script>
+</body>
+</html>
+

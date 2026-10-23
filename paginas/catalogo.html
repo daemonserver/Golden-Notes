@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es" data-tema="claro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Catálogo completo de Golden Notes: perfumes de hombre y mujer con búsqueda, filtros por diseñador, familia olfativa y precios en quetzales.">
+  <meta name="theme-color" content="#c9a227">
+  <title>Catálogo — Golden Notes</title>
+  <link rel="icon" type="image/svg+xml" href="../img/favicon.svg">
+  <link href="../css/fuentes-locales.css" rel="stylesheet">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/componentes.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/animaciones.css">
+  <script src="../js/tema-init.js"></script>
+</head>
+<body>
+  <div class="fondo-aurora" aria-hidden="true"><span></span></div>
+
+  <!-- ===================== ENCABEZADO ===================== -->
+  <header class="encabezado" data-encabezado>
+    <div class="contenedor encabezado__interior">
+      <a class="logo" href="../index.html" aria-label="Golden Notes — inicio">
+        <img class="logo__marca" src="../img/favicon.svg" alt="" width="40" height="40">
+        <span class="logo__texto">
+          <span class="logo__nombre">Golden Notes</span>
+          <span class="logo__lema">Perfumería de diseñador</span>
+        </span>
+      </a>
+
+      <nav class="nav nav--escritorio" aria-label="Navegación principal">
+        <ul class="nav__lista">
+          <li><a class="nav__enlace" data-nav href="../index.html">Inicio</a></li>
+          <li><a class="nav__enlace" data-nav href="catalogo.html">Catálogo</a></li>
+          <li><a class="nav__enlace" data-nav href="disenador.html">Diseñadores</a></li>
+          <li><a class="nav__enlace" data-nav href="origen-y-compra.html">Origen</a></li>
+          <li><a class="nav__enlace" data-nav href="contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
+
+      <div class="acciones">
+        <button class="btn btn--icono" type="button" data-tema-toggle aria-pressed="false" aria-label="Cambiar a modo oscuro">
+          <span data-tema-icono aria-hidden="true">☾</span>
+        </button>
+        <a class="btn btn--icono enlace-carrito" href="carrito.html" aria-label="Ver carrito de compras">
+          <span aria-hidden="true">🛒</span>
+          <span class="contador-carrito" data-contador-carrito>0</span>
+        </a>
+        <button class="hamburguesa" type="button" data-hamburguesa aria-label="Abrir menú" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="menu-movil" data-menu-movil aria-label="Menú móvil">
+    <a class="nav__enlace" data-nav href="../index.html">Inicio</a>
+    <a class="nav__enlace" data-nav href="catalogo.html">Catálogo</a>
+    <a class="nav__enlace" data-nav href="disenador.html">Diseñadores</a>
+    <a class="nav__enlace" data-nav href="origen-y-compra.html">Origen</a>
+    <a class="nav__enlace" data-nav href="contacto.html">Contacto</a>
+    <a class="nav__enlace" data-nav href="carrito.html">Carrito</a>
+  </nav>
+
+  <main>
+    <header class="pagina-cabecera">
+      <div class="contenedor">
+        <span class="pagina-cabecera__ojo">Catálogo completo</span>
+        <h1>Todas las fragancias</h1>
+        <p>
+          Busca por nombre o diseñador, filtra por género y familia olfativa,
+          y abre cualquier perfume para ver su pirámide olfativa completa.
+        </p>
+      </div>
+    </header>
+
+    <section class="seccion" style="padding-top: 0;">
+      <div class="contenedor">
+        <!-- ---------------------- FILTROS ---------------------- -->
+        <div class="filtros revelar">
+          <div class="filtros__fila">
+            <div class="buscador">
+              <span class="buscador__icono" aria-hidden="true">🔍</span>
+              <label class="solo-lectores" for="buscar">Buscar perfume</label>
+              <input type="search" id="buscar" placeholder="Buscar por nombre, diseñador o nota…" autocomplete="off">
+            </div>
+
+            <div class="campo">
+              <label class="campo__etiqueta" for="filtro-disenador">Diseñador</label>
+              <select id="filtro-disenador"></select>
+            </div>
+
+            <div class="campo" style="flex: 1 1 170px;">
+              <label class="campo__etiqueta" for="filtro-orden">Ordenar por</label>
+              <select id="filtro-orden">
+                <option value="nombre-asc">Nombre (A → Z)</option>
+                <option value="nombre-desc">Nombre (Z → A)</option>
+                <option value="precio-asc">Precio: menor a mayor</option>
+                <option value="precio-desc">Precio: mayor a menor</option>
+                <option value="disenador">Diseñador</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="filtros__fila">
+            <div class="chips" role="group" aria-label="Filtrar por género">
+              <button type="button" class="chip activo" data-genero="">Todos</button>
+              <button type="button" class="chip" data-genero="hombre">Caballero</button>
+              <button type="button" class="chip" data-genero="mujer">Dama</button>
+            </div>
+
+            <button type="button" class="chip" data-limpiar style="margin-left: auto;">↺ Limpiar filtros</button>
+          </div>
+
+          <div class="filtros__fila filtros__fila--familias" data-familias-contenedor>
+            <button class="familias__toggle" type="button" data-toggle-familias aria-expanded="true" aria-controls="lista-familias">
+              <span>Familias olfativas</span>
+              <span class="familias__estado" data-resumen-familias>Ver opciones</span>
+              <span class="familias__flecha" aria-hidden="true">⌄</span>
+            </button>
+            <div class="chips" id="lista-familias" role="group" aria-label="Filtrar por familia olfativa" data-familias></div>
+          </div>
+        </div>
+
+        <!-- ---------------------- RESULTADOS ---------------------- -->
+        <div class="resultados__info" style="margin-top: 1.8rem;">
+          <span data-contador>0 fragancias encontradas</span>
+          <a class="texto-suave" href="disenador.html" style="text-decoration: underline; text-underline-offset: 3px;">
+            ¿Prefieres agruparlas por diseñador?
+          </a>
+        </div>
+
+        <div class="rejilla-perfumes" data-rejilla-catalogo aria-live="polite"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== PIE ===================== -->
+  <footer class="pie">
+    <div class="contenedor">
+      <div class="pie__interior">
+        <div class="pie__marca">
+          <a class="logo" href="../index.html">
+            <img class="logo__marca" src="../img/favicon.svg" alt="" width="40" height="40">
+            <span class="logo__texto">
+              <span class="logo__nombre">Golden Notes</span>
+              <span class="logo__lema">Perfumería de diseñador</span>
+            </span>
+          </a>
+          <p>Fragancias seleccionadas con mimo, para quienes entienden que un perfume es una firma.</p>
+        </div>
+
+        <div>
+          <h4>Explorar</h4>
+          <ul class="pie__lista">
+            <li><a href="catalogo.html">Catálogo completo</a></li>
+            <li><a href="disenador.html">Por diseñador</a></li>
+            <li><a href="carrito.html">Mi carrito</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Categorías</h4>
+          <ul class="pie__lista">
+            <li><a href="catalogo.html?genero=hombre">Perfumes de caballero</a></li>
+            <li><a href="catalogo.html?genero=mujer">Perfumes de dama</a></li>
+            <li><a href="catalogo.html?orden=precio-asc">Mejor precio</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Contacto</h4>
+          <ul class="pie__lista">
+            <li><a href="tel:+50241341846">+502 4134 1846</a></li>
+            <li><a href="mailto:hectorpineda.em@gmail.com">hectorpineda.em@gmail.com</a></li>
+            <li><span>Lunes a viernes, en horario flexible.</span></li>
+          </ul>
+          <div class="pie__redes">
+            <a class="pie__red" href="https://wa.me/50241341846" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+            <a class="pie__red" href="mailto:hectorpineda.em@gmail.com" aria-label="Correo electrónico">✉</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="pie__inferior">
+        <span>© <span data-anio></span> Golden Notes. Todos los derechos reservados.</span>
+        <span>Hecho con dedicación en Guatemala 🇬🇹</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/datos.js" defer></script>
+  <script src="../js/utilidades.js" defer></script>
+  <script src="../js/carrito.js" defer></script>
+  <script src="../js/tarjetas.js" defer></script>
+  <script src="../js/modal-detalle.js" defer></script>
+  <script src="../js/navegacion.js" defer></script>
+  <script src="../js/catalogo.js" defer></script>
+</body>
+</html>
+

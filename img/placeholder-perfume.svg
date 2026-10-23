@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" role="img" aria-label="Fuente de gotas doradas que varias personas intentan alcanzar" fill="none">
+  <defs>
+    <linearGradient id="oro-fuente" x1="90" y1="96" x2="304" y2="390" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#e8cf7a"/>
+      <stop offset="0.52" stop-color="#c9a227"/>
+      <stop offset="1" stop-color="#a8842a"/>
+    </linearGradient>
+    <linearGradient id="brillo-fuente" x1="190" y1="252" x2="210" y2="350" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff3c4"/>
+      <stop offset="1" stop-color="#c9a227"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Gotas que brotan desde la fuente -->
+  <g fill="url(#oro-fuente)" stroke="#e8cf7a" stroke-width="1.5" stroke-linejoin="round">
+    <path d="M72 112c-6 10-15 19-15 29a15 15 0 1 0 30 0c0-10-9-19-15-29Z"/>
+    <path d="M200 72c-8 13-20 26-20 39a20 20 0 1 0 40 0c0-13-12-26-20-39Z"/>
+    <path d="M328 126c-5 8-12 16-12 24a12 12 0 1 0 24 0c0-8-7-16-12-24Z"/>
+    <path d="M122 183c-4 6-9 12-9 18a9 9 0 1 0 18 0c0-6-5-12-9-18Z" stroke-width="1.2"/>
+    <path d="M278 198c-4 6-9 12-9 18a9 9 0 1 0 18 0c0-6-5-12-9-18Z" stroke-width="1.2"/>
+    <circle cx="104" cy="158" r="4" stroke="none"/>
+    <circle cx="300" cy="172" r="4" stroke="none"/>
+  </g>
+
+  <!-- Chorros curvos y cuenco de la fuente -->
+  <g stroke="url(#oro-fuente)" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M187 319c-21-19-31-43-26-67 3-13 10-24 20-33" stroke-width="5"/>
+    <path d="M213 319c21-19 31-43 26-67-3-13-10-24-20-33" stroke-width="5"/>
+    <path d="M194 307c-8-26-6-53 6-75" stroke="url(#brillo-fuente)" stroke-width="3"/>
+    <path d="M206 307c8-26 6-53-6-75" stroke="url(#brillo-fuente)" stroke-width="3"/>
+    <path d="M155 327c12 14 27 21 45 21s33-7 45-21" stroke-width="5"/>
+    <path d="M145 339c12 17 32 26 55 26s43-9 55-26" stroke-width="5"/>
+    <path d="M168 366c8 9 19 14 32 14s24-5 32-14" stroke-width="4"/>
+  </g>
+
+  <!-- Personas alzando los brazos para alcanzar las gotas -->
+  <g stroke="url(#oro-fuente)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <g transform="translate(83 286) rotate(-9)">
+      <circle cy="0" r="11" fill="#e8cf7a" stroke-width="2"/>
+      <path d="M0 13v39M-2 20l-17-17-15-24M-2 20l17 8 12 17M0 52l-13 29M0 52l16 28"/>
+      <circle cx="-35" cy="-22" r="3.5" fill="#e8cf7a" stroke="none"/>
+    </g>
+    <g transform="translate(315 288) rotate(8)">
+      <circle cy="0" r="11" fill="#e8cf7a" stroke-width="2"/>
+      <path d="M0 13v39M2 20l17-18 12-27M2 20l-17 8-12 18M0 52l-15 29M0 52l15 29"/>
+      <circle cx="31" cy="-28" r="3.5" fill="#e8cf7a" stroke="none"/>
+    </g>
+    <g transform="translate(132 327) scale(.78)">
+      <circle cy="0" r="11" fill="#e8cf7a" stroke-width="2"/>
+      <path d="M0 13v39M0 21l-18-8-12-23M0 21l17-15 6-27M0 52l-13 29M0 52l15 29"/>
+      <circle cx="23" cy="-25" r="3.5" fill="#e8cf7a" stroke="none"/>
+    </g>
+  </g>
+
+  <text x="200" y="438" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="21" fill="#a8842a" letter-spacing="3">GOLDEN NOTES</text>
+  <text x="200" y="464" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#5c6170" letter-spacing="1">Imagen no disponible</text>
+</svg>

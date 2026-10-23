@@ -1,0 +1,114 @@
+/* ==========================================================================
+   Golden Notes — animaciones.css
+   Fotogramas clave y animaciones sutiles de entrada (estilo liquid glass).
+   Todas se desactivan si el usuario pide menos movimiento en su sistema.
+   ========================================================================== */
+
+@keyframes flotar-suave {
+  0%,
+  100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes flotar-mancha {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(4vw, -3vw) scale(1.12); }
+  100% { transform: translate(-3vw, 3vw) scale(0.95); }
+}
+
+@keyframes desvanecer {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes entrar-modal {
+  from {
+    opacity: 0;
+    transform: translateY(26px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes entrar-aviso {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes salir-aviso {
+  to {
+    opacity: 0;
+    transform: translateY(12px) scale(0.96);
+  }
+}
+
+@keyframes bajar-menu {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes aparecer-arriba {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes latido {
+  0%,
+  100% { transform: scale(1); }
+  50% { transform: scale(1.12); }
+}
+
+/* ------------------------- Aparición al hacer scroll ---------------------- */
+
+.revelar {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.revelar.es-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Retardo escalonado opcional con style="--retardo: 0.1s" */
+.revelar[style*="--retardo"] { transition-delay: var(--retardo); }
+
+/* ------------------------------ Menos movimiento -------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .revelar {
+    opacity: 1;
+    transform: none;
+  }
+}

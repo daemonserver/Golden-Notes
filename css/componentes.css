@@ -1,0 +1,1216 @@
+/* ==========================================================================
+   Golden Notes — componentes.css
+   Botones, tarjetas de perfume, filtros, modal de detalle, pirámide olfativa,
+   formularios, tabla del carrito, notificaciones y demás piezas reutilizables.
+   ========================================================================== */
+
+/* --------------------------------- Cristal -------------------------------- */
+
+.cristal {
+  background: var(--cristal);
+  border: 1px solid var(--cristal-borde);
+  box-shadow: var(--sombra-suave), inset 0 1px 0 var(--brillo);
+  -webkit-backdrop-filter: var(--desenfoque);
+  backdrop-filter: var(--desenfoque);
+  transition: background-color var(--transicion), border-color var(--transicion),
+    box-shadow var(--transicion), transform var(--transicion);
+}
+
+/* --------------------------------- Botones -------------------------------- */
+
+.btn {
+  --btn-fondo: var(--oro);
+  --btn-texto: #14161c;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.78rem 1.6rem;
+  border: 1px solid transparent;
+  border-radius: 99px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--transicion), box-shadow var(--transicion),
+    background-color var(--transicion), color var(--transicion),
+    border-color var(--transicion);
+}
+
+.btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, 0.45) 50%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform 0.7s ease;
+}
+
+.btn:hover::after { transform: translateX(120%); }
+
+.btn--oro {
+  background: linear-gradient(135deg, var(--oro-claro), var(--oro-intenso));
+  color: #14161c;
+  box-shadow: 0 8px 24px -10px var(--oro-brillo);
+}
+
+.btn--oro:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 34px -10px var(--oro-brillo);
+}
+
+.btn--fantasma {
+  background: var(--cristal);
+  border-color: var(--cristal-borde);
+  color: var(--texto);
+  -webkit-backdrop-filter: var(--desenfoque);
+  backdrop-filter: var(--desenfoque);
+}
+
+.btn--fantasma:hover {
+  border-color: var(--oro);
+  color: var(--oro);
+  transform: translateY(-2px);
+}
+
+.btn--contorno {
+  border-color: var(--oro);
+  color: var(--oro);
+}
+
+.btn--contorno:hover {
+  background: var(--oro);
+  color: #14161c;
+}
+
+.btn--ancho { width: 100%; }
+
+.btn--icono {
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border-radius: 50%;
+  background: var(--cristal);
+  border-color: var(--cristal-borde);
+  color: var(--texto);
+  -webkit-backdrop-filter: var(--desenfoque);
+  backdrop-filter: var(--desenfoque);
+}
+
+/* El contador sobresale del botón; debe quedar fuera del recorte del brillo. */
+.btn.enlace-carrito { overflow: visible; }
+
+/* El destello del carrito usa una capa propia, recortada al círculo del icono. */
+.btn.enlace-carrito::after { content: none; }
+
+.enlace-carrito > [aria-hidden="true"] {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.enlace-carrito > [aria-hidden="true"]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, 0.45) 50%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform 0.7s ease;
+}
+
+.enlace-carrito:hover > [aria-hidden="true"]::after {
+  transform: translateX(120%);
+}
+
+.btn--icono:hover {
+  color: var(--oro);
+  border-color: var(--oro);
+}
+
+.btn[disabled] {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* --------------------------- Insignias y etiquetas ------------------------ */
+
+.etiqueta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.7rem;
+  border-radius: 99px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.etiqueta--oro {
+  background: linear-gradient(135deg, var(--oro-claro), var(--oro-intenso));
+  color: #14161c;
+}
+
+.etiqueta--cristal {
+  background: var(--cristal);
+  border: 1px solid var(--cristal-borde);
+  color: var(--texto-suave);
+  -webkit-backdrop-filter: var(--desenfoque);
+  backdrop-filter: var(--desenfoque);
+}
+
+.contador-carrito {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  min-width: 19px;
+  height: 19px;
+  padding-inline: 4px;
+  border-radius: 99px;
+  background: linear-gradient(135deg, var(--oro-claro), var(--oro-intenso));
+  color: #14161c;
+  font-size: 0.68rem;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 2px 8px var(--oro-brillo);
+  transform: scale(0);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 2;
+}
+
+.contador-carrito.visible { transform: scale(1); }
+
+/* ------------------------------- Acordes / notas -------------------------- */
+
+.acordes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.acorde {
+  padding: 0.22rem 0.68rem;
+  border-radius: 99px;
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  color: var(--oro-intenso);
+  background: rgba(201, 162, 39, 0.10);
+  border: 1px solid rgba(201, 162, 39, 0.30);
+  transition: background-color var(--transicion), color var(--transicion),
+    border-color var(--transicion);
+}
+
+[data-tema="oscuro"] .acorde {
+  color: var(--oro-claro);
+  background: rgba(201, 162, 39, 0.12);
+  border-color: rgba(232, 207, 122, 0.25);
+}
+
+.acorde:hover {
+  background: rgba(201, 162, 39, 0.22);
+}
+
+.notas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.nota {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  background: var(--cristal);
+  border: 1px solid var(--cristal-borde);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+.nota::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--oro-claro), var(--oro-intenso));
+}
+
+/* ----------------------------- Tarjeta perfume ---------------------------- */
+
+.tarjeta {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radio);
+  overflow: hidden;
+  cursor: pointer;
+  isolation: isolate;
+}
+
+.tarjeta:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--sombra-elevada), inset 0 1px 0 var(--brillo);
+}
+
+.tarjeta__marco {
+  position: relative;
+  aspect-ratio: 4 / 4.4;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 30%, rgba(201, 162, 39, 0.12), transparent 65%);
+}
+
+.tarjeta__img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 8% 6% 4%;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.tarjeta:hover .tarjeta__img { transform: scale(1.07) translateY(-4px); }
+
+.tarjeta__genero {
+  position: absolute;
+  top: 0.85rem;
+  left: 0.85rem;
+  z-index: 2;
+}
+
+.etiqueta--no-disponible {
+  color: #fff;
+  background: #873a32;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+}
+
+.tarjeta__disponibilidad {
+  position: absolute;
+  top: 0.85rem;
+  right: 0.85rem;
+  z-index: 2;
+}
+
+.detalle__disponibilidad { margin: 0.65rem 0; }
+
+.aviso-disponibilidad {
+  padding: 0.9rem 1rem;
+  border: 1px solid rgba(135, 58, 50, 0.35);
+  border-radius: var(--radio-pequeno);
+  color: var(--texto);
+  background: rgba(135, 58, 50, 0.09);
+}
+
+.tarjeta__rapida {
+  position: absolute;
+  top: 0.7rem;
+  right: 0.7rem;
+  z-index: 2;
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--cristal-fuerte);
+  border: 1px solid var(--cristal-borde);
+  color: var(--texto);
+  -webkit-backdrop-filter: var(--desenfoque);
+  backdrop-filter: var(--desenfoque);
+  transition: transform var(--transicion), color var(--transicion),
+    border-color var(--transicion), opacity var(--transicion);
+  opacity: 0;
+  transform: scale(0.85);
+}
+
+.tarjeta:hover .tarjeta__rapida {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@media (hover: none), (max-width: 768px) {
+  .tarjeta__rapida {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.tarjeta__rapida:hover {
+  color: var(--oro);
+  border-color: var(--oro);
+}
+
+.tarjeta__cuerpo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding: 1.05rem 1.2rem 1.3rem;
+  flex: 1;
+}
+
+.tarjeta__disenador {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+}
+
+.tarjeta__nombre {
+  font-size: 1.35rem;
+  font-family: "Cormorant Garamond", Georgia, serif;
+}
+
+.tarjeta__pie {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: auto;
+  padding-top: 0.35rem;
+}
+
+.precio {
+  font-weight: 600;
+  font-size: 1.02rem;
+  color: var(--texto);
+  white-space: nowrap;
+}
+
+.precio small {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 400;
+  color: var(--texto-suave);
+}
+
+/* ---------------------------- Rejilla de perfumes ------------------------- */
+
+.rejilla-perfumes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
+  gap: clamp(1rem, 2.5vw, 1.7rem);
+}
+
+/* ------------------------------- Formularios ------------------------------ */
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.campo__etiqueta {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+}
+
+.campo input,
+.campo select,
+.campo textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radio-pequeno);
+  border: 1px solid var(--cristal-borde);
+  background: var(--cristal);
+  color: var(--texto);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  transition: border-color var(--transicion), box-shadow var(--transicion);
+}
+
+.campo input::placeholder,
+.campo textarea::placeholder { color: var(--texto-suave); }
+
+.campo input:focus,
+.campo select:focus,
+.campo textarea:focus {
+  outline: none;
+  border-color: var(--oro);
+  box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.18);
+}
+
+.campo textarea {
+  min-height: 130px;
+  resize: vertical;
+}
+
+.campo select {
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--texto-suave) 50%),
+    linear-gradient(135deg, var(--texto-suave) 50%, transparent 50%);
+  background-position: calc(100% - 20px) center, calc(100% - 14px) center;
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+  padding-right: 2.6rem;
+}
+
+/* Mantiene las opciones nativas en la paleta del tema, igual que el campo. */
+.campo select option,
+.linea__tamano option {
+  background: var(--fondo-alt);
+  color: var(--texto);
+}
+
+/* ------------------------- Selector de tamaño / cantidad ------------------ */
+
+.tamanos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+}
+
+.tamano {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  padding: 0.7rem 0.5rem;
+  border-radius: var(--radio-pequeno);
+  border: 1px solid var(--cristal-borde);
+  background: var(--cristal);
+  font-size: 0.95rem;
+  font-weight: 500;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  transition: border-color var(--transicion), background-color var(--transicion),
+    transform var(--transicion);
+}
+
+.tamano span {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--texto-suave);
+}
+
+.tamano:hover { transform: translateY(-2px); }
+
+.tamano.activo {
+  border-color: var(--oro);
+  background: rgba(201, 162, 39, 0.14);
+}
+
+.tamano.activo span { color: var(--oro-intenso); }
+
+[data-tema="oscuro"] .tamano.activo span { color: var(--oro-claro); }
+
+.cantidad {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 99px;
+  border: 1px solid var(--cristal-borde);
+  background: var(--cristal);
+  overflow: hidden;
+}
+
+.cantidad button {
+  width: 40px;
+  height: 42px;
+  font-size: 1.15rem;
+  display: grid;
+  place-items: center;
+  color: var(--texto);
+  transition: background-color var(--transicion), color var(--transicion);
+}
+
+.cantidad button:hover {
+  background: rgba(201, 162, 39, 0.16);
+  color: var(--oro);
+}
+
+.cantidad input {
+  width: 46px;
+  height: 42px;
+  text-align: center;
+  border: 0;
+  border-inline: 1px solid var(--cristal-borde);
+  background: transparent;
+  font-weight: 600;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.cantidad input::-webkit-outer-spin-button,
+.cantidad input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* --------------------------- Pirámide olfativa --------------------------- */
+
+.piramide {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  align-items: center;
+}
+
+.nivel {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  border-radius: 14px;
+  border: 1px solid var(--cristal-borde);
+  background: var(--cristal);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  transition: transform var(--transicion), border-color var(--transicion);
+}
+
+.nivel:hover {
+  transform: scale(1.02);
+  border-color: var(--oro);
+}
+
+.nivel--salida { width: 100%; }
+.nivel--corazon { width: 86%; }
+.nivel--fondo { width: 72%; }
+
+.nivel h4 {
+  font-family: "Outfit", sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--oro-intenso);
+  margin-bottom: 0.25rem;
+}
+
+[data-tema="oscuro"] .nivel h4 { color: var(--oro-claro); }
+
+.nivel p {
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--texto);
+}
+
+/* ------------------------------ Modal detalle ---------------------------- */
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(0.75rem, 3vw, 2rem);
+}
+
+.modal.abierto { display: flex; }
+
+.modal__fondo {
+  position: absolute;
+  inset: 0;
+  background: rgba(8, 9, 13, 0.68);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  animation: desvanecer 0.35s ease;
+}
+
+.modal__panel {
+  position: relative;
+  width: min(100%, 1000px);
+  max-height: min(92vh, 900px);
+  overflow-y: auto;
+  padding: 0.45rem;
+  scrollbar-gutter: stable;
+  border-radius: var(--radio-grande);
+  background: var(--cristal-fuerte);
+  -webkit-backdrop-filter: var(--desenfoque);
+  backdrop-filter: var(--desenfoque);
+  animation: entrar-modal 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Panel casi opaco: el contenido de la página no debe filtrarse y restar
+   legibilidad al detalle del perfume. */
+[data-tema="claro"] .modal__panel { background: rgba(252, 250, 246, 0.94); }
+[data-tema="oscuro"] .modal__panel { background: rgba(15, 18, 26, 0.93); }
+
+.modal__cerrar {
+  position: absolute;
+  top: 0.9rem;
+  right: 0.9rem;
+  z-index: 5;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--cristal);
+  border: 1px solid var(--cristal-borde);
+  font-size: 1.3rem;
+  line-height: 1;
+  color: var(--texto);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  transition: transform var(--transicion), color var(--transicion),
+    border-color var(--transicion);
+}
+
+.modal__cerrar:hover {
+  transform: rotate(90deg);
+  color: var(--oro);
+  border-color: var(--oro);
+}
+
+.detalle {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(1rem, 3vw, 2.4rem);
+  padding: clamp(1.2rem, 3vw, 2.2rem);
+}
+
+.detalle__imagen {
+  position: relative;
+  border-radius: var(--radio);
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 35%, rgba(201, 162, 39, 0.16), transparent 70%);
+  min-height: 320px;
+}
+
+.detalle__imagen img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 6%;
+  animation: flotar-suave 7s ease-in-out infinite;
+}
+
+.detalle__info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.detalle__disenador {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--oro-intenso);
+}
+
+[data-tema="oscuro"] .detalle__disenador { color: var(--oro-claro); }
+
+.detalle__familia {
+  font-size: 0.95rem;
+  color: var(--texto-suave);
+}
+
+.detalle__bloque h3 {
+  font-family: "Outfit", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+  margin-bottom: 0.6rem;
+}
+
+.detalle__compra {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--cristal-borde);
+}
+
+.detalle__fila {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 860px) {
+  .detalle { grid-template-columns: 1fr; }
+  .detalle__imagen { min-height: 260px; max-height: 340px; }
+  .nivel--salida { width: 100%; }
+  .nivel--corazon { width: 92%; }
+  .nivel--fondo { width: 84%; }
+}
+
+/* ------------------------------ Notificación ------------------------------ */
+
+.avisos {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 120;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  width: min(92vw, 380px);
+  pointer-events: none;
+}
+
+.aviso {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.85rem 1.1rem;
+  border-radius: 14px;
+  background: var(--cristal-fuerte);
+  border: 1px solid var(--cristal-borde);
+  box-shadow: var(--sombra-elevada);
+  -webkit-backdrop-filter: var(--desenfoque);
+  backdrop-filter: var(--desenfoque);
+  font-size: 0.92rem;
+  animation: entrar-aviso 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.aviso.saliendo { animation: salir-aviso 0.35s ease forwards; }
+
+.aviso__icono {
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-size: 0.85rem;
+  background: linear-gradient(135deg, var(--oro-claro), var(--oro-intenso));
+  color: #14161c;
+}
+
+.aviso--error .aviso__icono {
+  background: linear-gradient(135deg, #e57373, #b3352f);
+  color: #fff;
+}
+
+/* -------------------------------- Carrito --------------------------------- */
+
+.carrito {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 0.9fr);
+  gap: clamp(1.2rem, 3vw, 2rem);
+  align-items: start;
+}
+
+.linea {
+  display: grid;
+  grid-template-columns: 92px minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem;
+  border-radius: var(--radio);
+  background: var(--cristal);
+  border: 1px solid var(--cristal-borde);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  box-shadow: var(--sombra-suave);
+  transition: transform var(--transicion), box-shadow var(--transicion);
+}
+
+.linea:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--sombra-elevada);
+}
+
+.linea__img {
+  width: 92px;
+  height: 108px;
+  object-fit: contain;
+  border-radius: 12px;
+  background: radial-gradient(circle at 50% 40%, rgba(201, 162, 39, 0.14), transparent 70%);
+  padding: 4px;
+}
+
+.linea__datos {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-width: 0;
+}
+
+.linea__nombre {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 1.3rem;
+  line-height: 1.1;
+}
+
+.linea__disenador {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+}
+
+.linea__controles {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+  margin-top: 0.15rem;
+}
+
+.linea__tamano {
+  padding: 0.4rem 0.7rem;
+  border-radius: 10px;
+  border: 1px solid var(--cristal-borde);
+  background: var(--cristal-fuerte);
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--texto);
+  color-scheme: inherit;
+}
+
+.linea__fin {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.45rem;
+  text-align: right;
+}
+
+.linea__subtotal {
+  font-size: 1.15rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.linea__quitar {
+  font-size: 0.8rem;
+  color: var(--texto-suave);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--transicion);
+}
+
+.linea__quitar:hover { color: #d9534f; }
+
+.resumen {
+  position: sticky;
+  top: calc(var(--altura-header) + 1rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem;
+  border-radius: var(--radio-grande);
+  background: var(--cristal);
+  border: 1px solid var(--cristal-borde);
+  -webkit-backdrop-filter: var(--desenfoque);
+  backdrop-filter: var(--desenfoque);
+  box-shadow: var(--sombra-suave);
+}
+
+.resumen h3 {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 1.6rem;
+}
+
+.resumen__fila {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.95rem;
+  color: var(--texto-suave);
+}
+
+.resumen__fila--total {
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--cristal-borde);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--texto);
+}
+
+.resumen__acciones {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.resumen__nota {
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--texto-suave);
+}
+
+@media (max-width: 880px) {
+  .carrito { grid-template-columns: 1fr; }
+  .resumen { position: static; }
+}
+
+/* ------------------------------- Estado vacío ----------------------------- */
+
+/* Las reglas de display de componentes deben respetar el estado oculto de HTML. */
+[hidden] { display: none !important; }
+
+.vacio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: clamp(2.5rem, 6vw, 4.5rem) 1.5rem;
+  text-align: center;
+  border-radius: var(--radio-grande);
+  border: 1px dashed var(--cristal-borde);
+  background: var(--cristal);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.vacio__icono { font-size: 2.6rem; }
+
+/* ------------------------------- Filtros -------------------------------- */
+
+.filtros {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.2rem clamp(1rem, 2.5vw, 1.6rem);
+  border-radius: var(--radio-grande);
+  background: var(--cristal);
+  border: 1px solid var(--cristal-borde);
+  -webkit-backdrop-filter: var(--desenfoque);
+  backdrop-filter: var(--desenfoque);
+  box-shadow: var(--sombra-suave);
+}
+
+.filtros__fila {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  align-items: flex-end;
+}
+
+.filtros__fila .campo { flex: 1 1 190px; }
+
+.familias__toggle { display: none; }
+
+@media (max-width: 768px) {
+  .filtros__fila--familias {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.55rem;
+  }
+
+  .familias__toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    width: 100%;
+    min-height: 44px;
+    padding: 0.65rem 0.85rem;
+    border: 1px solid var(--cristal-borde);
+    border-radius: var(--radio-pequeno);
+    background: var(--cristal-fuerte);
+    color: var(--texto);
+    font-weight: 600;
+    text-align: left;
+  }
+
+  .familias__estado {
+    overflow: hidden;
+    color: var(--texto-suave);
+    font-size: 0.82rem;
+    font-weight: 400;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .familias__flecha { color: var(--oro); transition: transform var(--transicion); }
+  .filtros__fila--familias:not(.plegado) .familias__flecha { transform: rotate(180deg); }
+
+  .filtros__fila--familias [data-familias] {
+    max-height: 30rem;
+    overflow: hidden;
+    opacity: 1;
+    transition: max-height 0.3s ease, opacity 0.2s ease;
+  }
+
+  .filtros__fila--familias.plegado [data-familias] {
+    max-height: 0;
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+.buscador {
+  position: relative;
+  flex: 1 1 260px;
+}
+
+.buscador input {
+  width: 100%;
+  padding: 0.8rem 1rem 0.8rem 2.7rem;
+  border-radius: 99px;
+  border: 1px solid var(--cristal-borde);
+  background: var(--cristal-fuerte);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  transition: border-color var(--transicion), box-shadow var(--transicion);
+}
+
+.buscador input:focus {
+  outline: none;
+  border-color: var(--oro);
+  box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.18);
+}
+
+.buscador__icono {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--texto-suave);
+  pointer-events: none;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.chip {
+  padding: 0.45rem 1rem;
+  border-radius: 99px;
+  border: 1px solid var(--cristal-borde);
+  background: var(--cristal);
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--texto-suave);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  transition: all var(--transicion);
+}
+
+.chip:hover {
+  color: var(--texto);
+  border-color: var(--oro);
+}
+
+.chip.activo {
+  background: linear-gradient(135deg, var(--oro-claro), var(--oro-intenso));
+  border-color: transparent;
+  color: #14161c;
+  font-weight: 600;
+}
+
+.resultados__info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-bottom: 1.2rem;
+  font-size: 0.95rem;
+  color: var(--texto-suave);
+}
+
+/* -------------------------------- Tarjeta diseñador ----------------------- */
+
+.tarjeta-disenador {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 190px;
+  padding: 1.4rem;
+  border-radius: var(--radio);
+  overflow: hidden;
+  border: 1px solid var(--cristal-borde);
+  background: var(--cristal);
+  -webkit-backdrop-filter: var(--desenfoque);
+  backdrop-filter: var(--desenfoque);
+  box-shadow: var(--sombra-suave);
+  transition: transform var(--transicion), box-shadow var(--transicion);
+}
+
+.tarjeta-disenador:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--sombra-elevada);
+}
+
+.tarjeta-disenador__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0.18;
+  padding: 12%;
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), opacity var(--transicion);
+}
+
+.tarjeta-disenador:hover .tarjeta-disenador__img {
+  transform: scale(1.1);
+  opacity: 0.3;
+}
+
+.tarjeta-disenador__contenido { position: relative; z-index: 1; }
+
+.tarjeta-disenador h3 {
+  font-size: 1.55rem;
+  margin-bottom: 0.15rem;
+}
+
+.tarjeta-disenador p {
+  font-size: 0.85rem;
+  color: var(--texto-suave);
+}
+
+.rejilla-disenadores {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: clamp(0.9rem, 2vw, 1.5rem);
+}
+
+/* -------------------------------- FAQ ------------------------------------ */
+
+.pregunta {
+  border-radius: var(--radio-pequeno);
+  border: 1px solid var(--cristal-borde);
+  background: var(--cristal);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+}
+
+.pregunta + .pregunta { margin-top: 0.7rem; }
+
+.pregunta summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.2rem;
+  cursor: pointer;
+  font-weight: 500;
+  list-style: none;
+  transition: color var(--transicion);
+}
+
+.pregunta summary::-webkit-details-marker { display: none; }
+
+.pregunta summary::after {
+  content: "+";
+  font-size: 1.3rem;
+  color: var(--oro);
+  transition: transform var(--transicion);
+}
+
+.pregunta[open] summary::after { transform: rotate(45deg); }
+
+.pregunta[open] summary { color: var(--oro); }
+
+.pregunta__respuesta {
+  padding: 0 1.2rem 1.1rem;
+  color: var(--texto-suave);
+  font-size: 0.95rem;
+}

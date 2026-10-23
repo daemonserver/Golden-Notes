@@ -1,0 +1,206 @@
+/* ==========================================================================
+   Golden Notes — base.css
+   Variables del sistema de diseño, reinicio de estilos y tipografía.
+   Los colores del modo oscuro se activan con [data-tema="oscuro"].
+   ========================================================================== */
+
+:root {
+  /* Marca */
+  --oro: #c9a227;
+  --oro-claro: #e8cf7a;
+  --oro-intenso: #a8842a;
+  --oro-brillo: rgba(201, 162, 39, 0.45);
+
+  /* Fondos (modo claro) */
+  --fondo: #f6f3ec;
+  --fondo-alt: #ece7db;
+  --mancha-1: rgba(201, 162, 39, 0.30);
+  --mancha-2: rgba(120, 96, 168, 0.22);
+  --mancha-3: rgba(52, 120, 140, 0.18);
+
+  /* Cristal (liquid glass) */
+  --cristal: rgba(255, 255, 255, 0.55);
+  --cristal-fuerte: rgba(255, 255, 255, 0.78);
+  --cristal-borde: rgba(255, 255, 255, 0.70);
+  --cristal-sombra: rgba(28, 26, 20, 0.10);
+  --brillo: rgba(255, 255, 255, 0.65);
+  --desenfoque: saturate(160%) blur(18px);
+
+  /* Texto */
+  --texto: #1b1d24;
+  --texto-suave: #5c6170;
+  --texto-invertido: #fdfcf9;
+
+  /* Otros */
+  --radio: 20px;
+  --radio-pequeno: 12px;
+  --radio-grande: 28px;
+  --transicion: 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  --sombra-suave: 0 10px 30px -12px rgba(28, 26, 20, 0.18);
+  --sombra-elevada: 0 24px 60px -20px rgba(28, 26, 20, 0.28);
+  --ancho: 1220px;
+  --altura-header: 74px;
+}
+
+[data-tema="oscuro"] {
+  color-scheme: dark;
+  --fondo: #0a0c11;
+  --fondo-alt: #10131a;
+  --mancha-1: rgba(201, 162, 39, 0.22);
+  --mancha-2: rgba(126, 96, 190, 0.20);
+  --mancha-3: rgba(46, 138, 160, 0.16);
+
+  --cristal: rgba(20, 24, 33, 0.55);
+  --cristal-fuerte: rgba(24, 29, 39, 0.80);
+  --cristal-borde: rgba(255, 255, 255, 0.10);
+  --cristal-sombra: rgba(0, 0, 0, 0.45);
+  --brillo: rgba(255, 255, 255, 0.14);
+  --desenfoque: saturate(150%) blur(20px);
+
+  --texto: #f3f4f8;
+  --texto-suave: #a3aab9;
+
+  --sombra-suave: 0 10px 30px -12px rgba(0, 0, 0, 0.55);
+  --sombra-elevada: 0 24px 60px -20px rgba(0, 0, 0, 0.70);
+}
+
+:root,
+[data-tema="claro"] {
+  color-scheme: light;
+}
+
+/* ------------------------------- Reinicio -------------------------------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--altura-header) + 20px);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100vh;
+  font-family: "Outfit", "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--texto);
+  background: var(--fondo);
+  overflow-x: hidden;
+  transition: background-color var(--transicion), color var(--transicion);
+}
+
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+/* ------------------------------ Tipografía ------------------------------- */
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: 0.01em;
+}
+
+h1 { font-size: clamp(2.5rem, 6vw, 4.4rem); }
+h2 { font-size: clamp(1.9rem, 4vw, 2.9rem); }
+h3 { font-size: clamp(1.25rem, 2.4vw, 1.6rem); }
+
+p { text-wrap: pretty; }
+
+.texto-suave { color: var(--texto-suave); }
+.texto-oro { color: var(--oro); }
+
+/* ------------------------------ Utilidades ------------------------------- */
+
+.solo-lectores {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.contenedor {
+  width: min(100% - 2.5rem, var(--ancho));
+  margin-inline: auto;
+}
+
+.seccion {
+  padding-block: clamp(3.5rem, 8vw, 6.5rem);
+}
+
+:focus-visible {
+  outline: 2px solid var(--oro);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+::selection {
+  background: var(--oro);
+  color: #14161c;
+}
+
+/* Barra de desplazamiento */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--oro) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--oro-claro), var(--oro-intenso));
+  border-radius: 99px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}

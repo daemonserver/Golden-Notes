@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /prueba
+Disallow: /_
+
+Sitemap: https://daemonserver.github.io/golden-notes/sitemap.xml
