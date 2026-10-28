@@ -33,7 +33,7 @@ var GN = (function (modulo) {
   }
 
   function tamanosHTML(perfume) {
-    return TAMANOS.map(function (t) {
+    return GN.tamanosDisponibles(perfume).map(function (t) {
       return (
         '<button type="button" class="tamano" data-tamano="' +
         t +
@@ -74,7 +74,7 @@ var GN = (function (modulo) {
       '<button type="button" class="modal__cerrar" data-cerrar aria-label="Cerrar detalle">×</button>' +
       '<div class="detalle">' +
       '<div class="detalle__imagen">' +
-      '<img src="' +
+      '<img decoding="async" fetchpriority="high" src="' +
       GN.rutaImagen(perfume.imagen) +
       '" alt="' +
       GN.escapar(perfume.nombre + " — " + perfume.disenador) +
@@ -138,7 +138,7 @@ var GN = (function (modulo) {
     var perfume = GN.buscarPerfume(idPerfume);
     if (!perfume) return;
 
-    estado = { tamano: TAMANOS[0], cantidad: 1 };
+    estado = { tamano: GN.tamanosDisponibles(perfume)[0], cantidad: 1 };
     enfoqueAnterior = document.activeElement;
 
     if (!elementoModal) {
@@ -159,6 +159,7 @@ var GN = (function (modulo) {
     }
 
     elementoModal.innerHTML = contenidoHTML(perfume);
+    elementoModal.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
 
     GN.$$(".tamano", elementoModal).forEach(function (boton) {
@@ -210,6 +211,7 @@ var GN = (function (modulo) {
   function cerrar() {
     if (!elementoModal) return;
     elementoModal.classList.remove("abierto");
+    elementoModal.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
     if (enfoqueAnterior && enfoqueAnterior.focus) enfoqueAnterior.focus();
   }

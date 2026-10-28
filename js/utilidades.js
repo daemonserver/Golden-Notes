@@ -50,10 +50,19 @@ var GN = (function (modulo) {
     return PRECIOS_BASE[tamano] || PRECIOS_BASE[50];
   }
 
+  function tamanosDisponibles(perfume) {
+    var disponibles = perfume && perfume.precios
+      ? TAMANOS.filter(function (tamano) {
+          return typeof perfume.precios[tamano] === "number";
+        })
+      : [];
+    return disponibles.length ? disponibles : TAMANOS.slice();
+  }
+
   function precioMinimo(perfume) {
     return Math.min.apply(
       null,
-      TAMANOS.map(function (t) {
+      tamanosDisponibles(perfume).map(function (t) {
         return precioDe(perfume, t);
       })
     );
@@ -170,6 +179,7 @@ var GN = (function (modulo) {
   }
 
   function etiquetaGenero(genero) {
+    if (genero === "unisex") return "Unisex";
     return genero === "mujer" ? "Mujer" : "Hombre";
   }
 
@@ -197,6 +207,7 @@ var GN = (function (modulo) {
     rutaImagen: rutaImagen,
     rutaDiseñador: rutaDiseñador,
     precioDe: precioDe,
+    tamanosDisponibles: tamanosDisponibles,
     precioMinimo: precioMinimo,
     formatearPrecio: formatearPrecio,
     temaActual: temaActual,

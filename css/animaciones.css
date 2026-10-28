@@ -82,18 +82,27 @@
 
 .revelar {
   opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translate3d(0, 14px, 0);
+  transition: opacity 0.48s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.48s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .revelar.es-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: translate3d(0, 0, 0);
 }
 
 /* Retardo escalonado opcional con style="--retardo: 0.1s" */
 .revelar[style*="--retardo"] { transition-delay: var(--retardo); }
+
+@media (max-width: 768px) {
+  .revelar {
+    transform: translate3d(0, 10px, 0);
+    transition-duration: 0.34s;
+  }
+
+  .revelar[style*="--retardo"] { transition-delay: 0s; }
+}
 
 /* ------------------------------ Menos movimiento -------------------------- */
 
@@ -110,5 +119,11 @@
   .revelar {
     opacity: 1;
     transform: none;
+  }
+
+  .modal,
+  .modal.abierto,
+  .modal.abierto .modal__panel {
+    transition-delay: 0s !important;
   }
 }

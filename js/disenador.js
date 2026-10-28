@@ -34,7 +34,7 @@ var GN = (function (modulo) {
           '">' +
           '<img class="tarjeta-disenador__img" src="' +
           GN.rutaImagen(ejemplo ? ejemplo.imagen : null) +
-          '" alt="" aria-hidden="true" loading="lazy">' +
+          '" alt="" aria-hidden="true" loading="lazy" decoding="async">' +
           '<div class="tarjeta-disenador__contenido">' +
           "<h3>" +
           GN.escapar(diseñador.nombre) +

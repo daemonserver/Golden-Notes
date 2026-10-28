@@ -37,7 +37,11 @@ facturas-exportadas/
 # ---- Datos personales de clientes ----
 clientes/
 reportes-clientes/
-docs/
+docs/*
+!docs/GUIA-EDICION.md
+!docs/README.md
+!docs/SEGURIDAD-GITHUB.md
+!docs/INSTRUCTIVO-CARGA-COMMITS-VS-CODE.md
 
 # ---- Carpeta original de imágenes (las usadas viven en img/) ----
 Perfumes disponibles/

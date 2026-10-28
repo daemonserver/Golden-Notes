@@ -28,7 +28,8 @@ var GN = (function (modulo) {
         var perfume = GN.buscarPerfume(r.idPerfume);
         var tamano = parseInt(r.tamano, 10);
         var cantidad = parseInt(r.cantidad, 10);
-        if (TAMANOS.indexOf(tamano) === -1) tamano = TAMANOS[0];
+        var disponibles = GN.tamanosDisponibles(perfume);
+        if (disponibles.indexOf(tamano) === -1) tamano = disponibles[0];
         return {
           idPerfume: perfume.id,
           nombre: perfume.nombre,
@@ -86,7 +87,8 @@ var GN = (function (modulo) {
     if (!perfume || perfume.noDisponible === true) return false;
 
     tamano = parseInt(tamano, 10);
-    if (TAMANOS.indexOf(tamano) === -1) tamano = TAMANOS[0];
+    var disponibles = GN.tamanosDisponibles(perfume);
+    if (disponibles.indexOf(tamano) === -1) tamano = disponibles[0];
     cantidad = Math.min(99, Math.max(1, parseInt(cantidad, 10) || 1));
 
     var existente = renglones.filter(function (r) {
@@ -116,9 +118,9 @@ var GN = (function (modulo) {
     if (!original) return;
 
     nuevoTamano = parseInt(nuevoTamano, 10);
-    if (TAMANOS.indexOf(nuevoTamano) === -1 || nuevoTamano === original.tamano) return;
-
     var perfume = GN.buscarPerfume(original.idPerfume);
+    if (!perfume) return;
+    if (GN.tamanosDisponibles(perfume).indexOf(nuevoTamano) === -1 || nuevoTamano === original.tamano) return;
     original.tamano = nuevoTamano;
     original.precio = perfume ? GN.precioDe(perfume, nuevoTamano) : original.precio;
 

@@ -51,6 +51,21 @@
   animation: flotar-mancha 30s ease-in-out infinite alternate;
 }
 
+@media (max-width: 768px) {
+  .vitrina__tarjeta {
+    animation: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  .fondo-aurora::before,
+  .fondo-aurora::after,
+  .fondo-aurora span {
+    animation: none;
+    filter: blur(52px);
+  }
+}
+
 /* ------------------------------- Encabezado ------------------------------- */
 
 .encabezado {

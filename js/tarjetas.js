@@ -41,7 +41,7 @@ var GN = (function (modulo) {
       GN.rutaImagen(perfume.imagen) +
       '" alt="' +
       GN.escapar(perfume.nombre + " — " + perfume.disenador) +
-      '" loading="lazy" width="400" height="440">' +
+      '" loading="lazy" decoding="async" width="400" height="440">' +
       "</div>" +
       '<div class="tarjeta__cuerpo">' +
       '<p class="tarjeta__disenador">' + GN.escapar(perfume.disenador) + "</p>" +
@@ -70,11 +70,12 @@ var GN = (function (modulo) {
     var botonAgregar = articulo.querySelector('[data-accion="agregar"]');
     if (botonAgregar) botonAgregar.addEventListener("click", function (evento) {
       evento.stopPropagation();
-      if (!GN.carrito.agregar(perfume.id, TAMANOS[0], 1)) {
+      var tamano = GN.tamanosDisponibles(perfume)[0];
+      if (!GN.carrito.agregar(perfume.id, tamano, 1)) {
         GN.avisar("Este perfume no está disponible.", "error");
         return;
       }
-      GN.avisar(perfume.nombre + " (" + TAMANOS[0] + " ml) añadido al carrito.");
+      GN.avisar(perfume.nombre + " (" + tamano + " ml) añadido al carrito.");
     });
 
     return articulo;

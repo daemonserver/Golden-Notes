@@ -52,7 +52,7 @@ const PRECIOS_BASE = { 50: 100, 100: 150 };
 const PERFUMES = [
   {
     id: "1-million-absolutely-gold",
-    noDisponible: true,
+    noDisponible: false,
     nombre: "1 Million Absolutely Gold",
     disenador: "Paco Rabanne",
     genero: "hombre",
@@ -65,7 +65,7 @@ const PERFUMES = [
       corazon: ["Flores"],
       fondo: ["Cuero"],
     },
-    precios: { 50: 100, 100: 150 },
+    precios: { 50: 100 },
   },
   {
     noDisponible: true,
@@ -88,7 +88,7 @@ const PERFUMES = [
     noDisponible: false,
     id: "9pm",
     nombre: "9PM",
-    disenador: "Afanan",
+    disenador: "Afnan",
     genero: "hombre",
     familia: "Ámbar Vainilla",
     imagen: "img/hombres/9pm_afnan_m.png",
@@ -558,7 +558,7 @@ const PERFUMES = [
       corazon: ["Angélica", "Pachulí"],
       fondo: ["Cumarina", "Ámbar", "Almizcle"],
     },
-    precios: { 50: 300, 100: 600 },
+    precios: { 50: 400, 100: 800 },
   },
   {
     noDisponible: true,
@@ -575,7 +575,7 @@ const PERFUMES = [
       corazon: ["Lavanda", "Notas metálicas", "Notas acuosas", "Carbón", "Tintura de tierra"],
       fondo: ["Ambroxan", "Pachulí"],
     },
-    precios: { 50: 300, 100: 600 },
+    precios: { 50: 400, 100: 800 },
   },
   {
     noDisponible: false,
@@ -781,20 +781,55 @@ const PERFUMES = [
     },
     precios: { 50: 100, 100: 150 },
   },
+  {
+    noDisponible: true,
+    id: "king-of-seduction",
+    nombre: "King Of Seduction",
+    disenador: "Antonio Banderas",
+    genero: "hombre",
+    familia: "Amaderado Aromático",
+    imagen: "img/hombres/king-of-seduction_antonio-banderas_m.png",
+    acordes: ["Aromático", "Cítrico", "Afrutados"],
+    notas: ["Marino", "Amaderado", "Fresco", "Almizclado", "Dulce", "Acuático", "Atalcado"],
+    piramide: {
+      salida: ["Piña", "Melón", "Bergamota", "Toronja", "Manzana verde"],
+      corazon: ["Notas marinas", "Jazmín", "Cardamomo", "Neroli"],
+      fondo: ["Vetiver", "Almizcle blanco", "Cedro", "Gamuza", "Ámbar"],
+    },
+    precios: { 50: 100, 100: 150 },
+  },
+ /* =========================== UNISEX ================================== */
    {
     noDisponible: false,
     id: "swiss-army",
     nombre: "Swiss Army",
     disenador: "Victorinox",
-    genero: "hombre",
+    genero: "unisex",
     familia: "Aromático Fougère",
-    imagen: "img/hombres/swiss-army_victorinox_m.png",
+    imagen: "img/unisex/swiss-army_victorinox_u.png",
     acordes: ["Aromático", "Fresco especiado", "Verde"],
     notas: ["Amaderado", "Cítrico", "Lavanda"],
     piramide: {
       salida: ["Menta", "Notas verdes", "Bergamota", "Yuzu", "Jengibre"],
       corazon: ["Lavanda", "Romero", "Hojas de violeta", "Flor de las nieves", "Geranio"],
       fondo: ["Ciprés", "Abeto balsámico", "Cedro", "Almizcle", "Ámbar"],
+    },
+    precios: { 50: 100, 100: 150 },
+  },
+  {
+    noDisponible: false,
+    id: "9am-dive",
+    nombre: "9 AM Dive",
+    disenador: "Afnan",
+    genero: "unisex",
+    familia: "Afrutado amaderado",
+    imagen: "img/unisex/9am-dive_afnan_u.png",
+    acordes: ["Afrutados", "Amaderado", "Verde", "Cálido especiado"],
+    notas: ["Aromático", "Cítrico", "Fresco", "Fresco especiado", "Especiado suave", "Ámbar"],
+    piramide: {
+      salida: ["Lima ácida", "Menta", "Grosellas negras", "Pimienta rosa"],
+      corazon: ["Manzana", "Incienso", "Cedro"],
+      fondo: ["Jengibre", "Sándalo", "Pachulí", "Jazmín"],
     },
     precios: { 50: 100, 100: 150 },
   },
@@ -1410,9 +1445,43 @@ const PERFUMES = [
       fondo: ["Haba Tonka", "Pachulí", "Vetiver de Haití"],
     },
     precios: { 50: 100, 100: 150 },
- }
+ },
+ {
+    noDisponible: false,
+    id: "swiss-army-for-her",
+    nombre: "Swiss Army for Her",
+    disenador: "Victorinox",
+    genero: "mujer",
+    familia: "Floral Verde",
+    imagen: "img/mujeres/swiss-army-for-her_victorinox_w.png",
+    acordes: ["Fresco", "Florales", "Flor blanco"],
+    notas: ["Cálido especiado", "Almizclado", "Rosas", "Verde", "Amaderado"],
+    piramide: {
+      salida: ["Jengibre"],
+      corazon: ["Lirio de los valles", "Peonía"],
+      fondo: ["Almizcle", "Notas amaderadas"],
+    },
+    precios: { 50: 100, 100: 150 },
+ },
+ {
+    noDisponible: true,
+    id: "9am",
+    nombre: "9 AM",
+    disenador: "Afnan",
+    genero: "mujer",
+    familia: "Ámbar Especiado",
+    imagen: "img/mujeres/9am_afnan_w.png",
+    acordes: ["Cítrico", "Amaderado", "Almizclado", "Aromático"],
+    notas: ["Cálido especiado", "Musgo", "Terrosos", "Lavanda", "Afrutados", "Atalcado"],
+    piramide: {
+      salida: ["Lima ácida", "Mandarina", "Cardamomo", "Pimienta rosa"],
+      corazon: ["Lavanda", "Manzana verde", "Flor de azahar del naranjo", "Rosa"],
+      fondo: ["Almizcle", "Musgo", "Cedro", "Pachulí"],
+    },
+    precios: { 50: 100, 100: 150 },
+  },
 ];
 
 /* Perfumes destacados en la portada (basta con listar sus id). */
-const DESTACADOS = ["fahrenheit", "meow", "black-xs", "flower-by-kenzo"];
+const DESTACADOS = ["9am-dive", "meow", "black-xs", "poison"];
 

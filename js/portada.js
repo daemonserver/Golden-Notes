@@ -20,7 +20,7 @@ var GN = (function (modulo) {
 
     vitrina.innerHTML = lista
       .slice(0, 4)
-      .map(function (perfume) {
+      .map(function (perfume, indice) {
         return (
           '<a class="vitrina__tarjeta" href="' +
           GN.ruta("paginas/catalogo.html") +
@@ -33,7 +33,9 @@ var GN = (function (modulo) {
           GN.rutaImagen(perfume.imagen) +
           '" alt="' +
           GN.escapar(perfume.nombre + " — " + perfume.disenador) +
-          '" loading="lazy" width="300" height="330">' +
+          '" loading="eager" decoding="async" ' +
+          (indice === 0 ? 'fetchpriority="high" ' : "") +
+          'width="300" height="330">' +
           '<div class="vitrina__info">' +
           '<p class="vitrina__disenador">' +
           GN.escapar(perfume.disenador) +

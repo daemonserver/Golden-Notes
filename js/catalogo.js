@@ -247,8 +247,10 @@ var GN = (function (modulo) {
           plegarFamilias(false);
           return;
         }
-        var inicioFamilias = filaFamilias.getBoundingClientRect().top + window.scrollY;
-        if (window.scrollY > inicioFamilias - 84) plegarFamilias(true);
+        var listaFamilias = filaFamilias.querySelector("[data-familias]");
+        if (!listaFamilias) return;
+        var finFamilias = listaFamilias.getBoundingClientRect().bottom + window.scrollY;
+        if (window.scrollY > finFamilias - 84) plegarFamilias(true);
       }
 
       function ajustarAlAncho() {

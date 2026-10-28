@@ -9,7 +9,8 @@ var GN = (function (modulo) {
   "use strict";
 
   function opcionesTamano(renglon) {
-    return TAMANOS.map(function (t) {
+    var perfume = GN.buscarPerfume(renglon.idPerfume);
+    return GN.tamanosDisponibles(perfume).map(function (t) {
       return (
         '<option value="' +
         t +
@@ -51,7 +52,7 @@ var GN = (function (modulo) {
           GN.rutaImagen(r.imagen) +
           '" alt="' +
           GN.escapar(r.nombre) +
-          '" loading="lazy" width="92" height="108">' +
+          '" loading="lazy" decoding="async" width="92" height="108">' +
           '<div class="linea__datos">' +
           '<p class="linea__disenador">' +
           GN.escapar(r.disenador) +
