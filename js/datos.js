@@ -1192,7 +1192,7 @@ const PERFUMES = [
     precios: { 50: 100, 100: 150 },
   },
  {
-    noDisponible: true,
+    noDisponible: false,
     id: "lady-million",
     nombre: "Lady Million",
     disenador: "Rabanne",
@@ -1483,5 +1483,5 @@ const PERFUMES = [
 ];
 
 /* Perfumes destacados en la portada (basta con listar sus id). */
-const DESTACADOS = ["9am-dive", "meow", "black-xs", "poison"];
+const DESTACADOS = ["good-girl_ch", "killer-queen", "toy-boy", "playboy-vip-for-him"];
 

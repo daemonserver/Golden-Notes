@@ -27,35 +27,6 @@ var GN = (function (modulo) {
       dosDigitos(fecha.getHours()) + dosDigitos(fecha.getMinutes()) + dosDigitos(fecha.getSeconds());
   }
 
-  function cargarLogo() {
-    return new Promise(function (resolve, reject) {
-      var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">' +
-        '<defs><linearGradient id="oro" x1="16" y1="14" x2="49" y2="51" gradientUnits="userSpaceOnUse">' +
-        '<stop offset="0" stop-color="#e8cf7a"/><stop offset=".52" stop-color="#c9a227"/>' +
-        '<stop offset="1" stop-color="#a8842a"/></linearGradient>' +
-        '<linearGradient id="brillo" x1="21" y1="25" x2="31" y2="45" gradientUnits="userSpaceOnUse">' +
-        '<stop stop-color="#fff8dc" stop-opacity=".9"/><stop offset="1" stop-color="#fff8dc" stop-opacity=".08"/>' +
-        '</linearGradient></defs><path d="M32 5.5C27.8 12.6 15 28.2 15 40a17 17 0 1 0 34 0C49 28.2 36.2 12.6 32 5.5Z" ' +
-        'fill="url(#oro)" stroke="#e8cf7a" stroke-width="1.2" stroke-linejoin="round"/>' +
-        '<path d="M25.8 26.2c-3.4 5-5.2 9.3-5.2 13.7 0 3.2 1.1 6.1 3 8.4" ' +
-        'stroke="url(#brillo)" stroke-width="2.2" stroke-linecap="round"/></svg>';
-      var imagen = new Image();
-      imagen.onload = function () {
-        try {
-          var canvas = document.createElement("canvas");
-          canvas.width = 128;
-          canvas.height = 128;
-          canvas.getContext("2d").drawImage(imagen, 0, 0, 128, 128);
-          resolve(canvas.toDataURL("image/png"));
-        } catch (error) {
-          resolve(null);
-        }
-      };
-      imagen.onerror = function () { resolve(null); };
-      imagen.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
-    });
-  }
-
   function textoPedido(renglones, cliente) {
     var lineas = ["*Pedido — " + NEGOCIO.nombre + "*", ""];
     renglones.forEach(function (r, i) {
@@ -78,14 +49,13 @@ var GN = (function (modulo) {
       encodeURIComponent(textoPedido(renglones, obtenerCliente())), "_blank", "noopener,noreferrer");
   }
 
-  function generarFacturaPDF() {
+  function generarFacturaPDF(modo) {
     var renglones = GN.carrito.listar();
     if (!renglones.length) return GN.avisar("Tu carrito está vacío.", "error");
     if (!window.jspdf || !window.jspdf.jsPDF) {
       return GN.avisar("No se pudo cargar el generador de PDF. Revisa tu conexión a internet.", "error");
     }
 
-    cargarLogo().then(function (logo) {
     var doc = new window.jspdf.jsPDF({ unit: "mm", format: "letter" });
     var fecha = new Date();
     var cliente = obtenerCliente();
@@ -102,7 +72,12 @@ var GN = (function (modulo) {
       doc.rect(0, 0, ancho, 38, "F");
       doc.setFillColor(201, 162, 39);
       doc.rect(0, 37, ancho, 1, "F");
-      if (logo) doc.addImage(logo, "PNG", margen, 7, 23, 23);
+      doc.setFillColor(232, 207, 122);
+      doc.circle(margen + 11.5, 18.5, 11.5, "F");
+      doc.setTextColor(18, 20, 25);
+      doc.setFont("times", "bold");
+      doc.setFontSize(10);
+      doc.text("GN", margen + 11.5, 21, { align: "center" });
       doc.setTextColor(232, 207, 122);
       doc.setFont("times", "bold");
       doc.setFontSize(25);
@@ -224,36 +199,71 @@ var GN = (function (modulo) {
     doc.setTextColor(115, 115, 115);
     doc.text(doc.splitTextToSize(NEGOCIO.notaFactura, anchoUtil), margen, alto - 13);
     var nombreArchivo = "golden-notes-" + marcaTiempo(fecha) + ".pdf";
-    var archivoPDF = new File([doc.output("blob")], nombreArchivo, { type: "application/pdf" });
-    var puedeCompartirArchivo = !!(navigator.share && navigator.canShare &&
-      navigator.canShare({ files: [archivoPDF] }));
-
-    if (puedeCompartirArchivo) {
-      navigator.share({ files: [archivoPDF], title: "Cotización Golden Notes" })
-        .then(function () { GN.avisar("Cotización compartida correctamente."); })
-        .catch(function (error) {
-          if (error && error.name === "AbortError") return;
-          descargarPDF(archivoPDF, nombreArchivo);
-        });
-    } else {
-      descargarPDF(archivoPDF, nombreArchivo);
+    if (modo === "descargar") {
+      descargarPDF(doc, nombreArchivo);
+      return;
     }
-    }).catch(function () {
+
+    try {
+      var blob = doc.output("blob");
+      var archivoPDF = typeof File === "function"
+        ? new File([blob], nombreArchivo, { type: "application/pdf" })
+        : null;
+      var puedeCompartirArchivo = false;
+      if (archivoPDF && navigator.share && navigator.canShare) {
+        try {
+          puedeCompartirArchivo = navigator.canShare({ files: [archivoPDF] });
+        } catch (errorCompatibilidad) {
+          puedeCompartirArchivo = false;
+        }
+      }
+
+      if (puedeCompartirArchivo) {
+        try {
+          navigator.share({ files: [archivoPDF], title: "Cotización Golden Notes" })
+            .then(function () { GN.avisar("Cotización compartida correctamente."); })
+            .catch(function (error) {
+              if (error && error.name === "AbortError") return;
+              descargarPDF(doc, nombreArchivo);
+            });
+        } catch (errorCompartir) {
+          descargarPDF(doc, nombreArchivo);
+        }
+      } else {
+        descargarPDF(doc, nombreArchivo);
+      }
+    } catch (error) {
       GN.avisar("No se pudo generar la cotización. Inténtalo de nuevo.", "error");
-    });
+    }
   }
 
-  function descargarPDF(archivo, nombre) {
-    var url = URL.createObjectURL(archivo);
-    var enlace = document.createElement("a");
-    enlace.href = url;
-    enlace.download = nombre;
-    enlace.style.display = "none";
-    document.body.appendChild(enlace);
-    enlace.click();
-    document.body.removeChild(enlace);
-    setTimeout(function () { URL.revokeObjectURL(url); }, 60000);
-    GN.avisar("Cotización PDF descargada correctamente.");
+  function descargarPDF(doc, nombre) {
+    try {
+      doc.save(nombre);
+      GN.avisar("Cotización PDF lista para guardar en tu dispositivo.");
+    } catch (error) {
+      try {
+        var url = URL.createObjectURL(doc.output("blob"));
+        var resumen = GN.$("[data-seccion-resumen]");
+        var enlaceAnterior = GN.$("[data-enlace-pdf]", resumen);
+        if (enlaceAnterior) enlaceAnterior.parentNode.removeChild(enlaceAnterior);
+        var enlace = document.createElement("a");
+        enlace.href = url;
+        enlace.download = nombre;
+        enlace.rel = "noopener";
+        enlace.dataset.enlacePdf = "";
+        enlace.textContent = "Abrir o guardar la cotización PDF";
+        enlace.className = "btn btn--contorno";
+        resumen.appendChild(enlace);
+        enlace.focus();
+        enlace.addEventListener("click", function () {
+          setTimeout(function () { URL.revokeObjectURL(url); }, 60000);
+        }, { once: true });
+        GN.avisar("Usa el enlace para abrir o guardar la cotización PDF.");
+      } catch (errorAlAbrir) {
+        GN.avisar("No se pudo abrir el PDF. Inténtalo de nuevo.", "error");
+      }
+    }
   }
 
   modulo.generarFacturaPDF = generarFacturaPDF;

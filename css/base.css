@@ -40,6 +40,7 @@
   --sombra-elevada: 0 24px 60px -20px rgba(28, 26, 20, 0.28);
   --ancho: 1220px;
   --altura-header: 74px;
+  --altura-header-segura: calc(var(--altura-header) + env(safe-area-inset-top, 0px));
 }
 
 [data-tema="oscuro"] {
@@ -81,12 +82,18 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: calc(var(--altura-header) + 20px);
+  scroll-padding-top: calc(var(--altura-header-segura) + 20px);
   -webkit-text-size-adjust: 100%;
+}
+
+html.gn-motion-ready .revelar:not(.es-visible) {
+  opacity: 0;
+  transform: translate3d(0, 14px, 0);
 }
 
 body {
   min-height: 100vh;
+  padding-inline: env(safe-area-inset-left) env(safe-area-inset-right);
   font-family: "Outfit", "Segoe UI", system-ui, -apple-system, sans-serif;
   font-weight: 400;
   font-size: 1rem;

@@ -156,7 +156,14 @@ var GN = (function (modulo) {
     }
 
     var botonPDF = GN.$("[data-factura]");
-    if (botonPDF) botonPDF.addEventListener("click", GN.generarFacturaPDF);
+    if (botonPDF) botonPDF.addEventListener("click", function () {
+      GN.generarFacturaPDF("compartir");
+    });
+
+    var botonDescargar = GN.$("[data-descargar]");
+    if (botonDescargar) botonDescargar.addEventListener("click", function () {
+      GN.generarFacturaPDF("descargar");
+    });
 
     var botonWhatsApp = GN.$("[data-whatsapp]");
     if (botonWhatsApp) botonWhatsApp.addEventListener("click", GN.enviarPedidoWhatsApp);

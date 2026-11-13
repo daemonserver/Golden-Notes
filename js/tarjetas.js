@@ -121,6 +121,8 @@ var GN = (function (modulo) {
       return;
     }
 
+    document.documentElement.classList.add("gn-motion-ready");
+
     var altoVentana = window.innerHeight || 0;
 
     function enPantalla(elemento) {

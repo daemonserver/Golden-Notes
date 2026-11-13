@@ -74,7 +74,7 @@
   left: 0;
   right: 0;
   z-index: 80;
-  height: var(--altura-header);
+  height: var(--altura-header-segura);
   transition: background-color var(--transicion), box-shadow var(--transicion),
     border-color var(--transicion);
   border-bottom: 1px solid transparent;
@@ -210,7 +210,7 @@
 
 .menu-movil {
   position: fixed;
-  inset: var(--altura-header) 0 auto 0;
+  inset: var(--altura-header-segura) 0 auto 0;
   z-index: 79;
   display: none;
   flex-direction: column;
@@ -243,7 +243,7 @@
 
 .hero {
   position: relative;
-  padding-top: calc(var(--altura-header) + clamp(2rem, 7vw, 5rem));
+  padding-top: calc(var(--altura-header-segura) + clamp(2rem, 7vw, 5rem));
   padding-bottom: clamp(3rem, 8vw, 6rem);
   overflow: hidden;
 }
@@ -369,7 +369,7 @@
 /* ------------------------- Cabecera de página interior -------------------- */
 
 .pagina-cabecera {
-  padding-top: calc(var(--altura-header) + clamp(2.2rem, 6vw, 4rem));
+  padding-top: calc(var(--altura-header-segura) + clamp(2.2rem, 6vw, 4rem));
   padding-bottom: clamp(1.6rem, 4vw, 2.6rem);
   text-align: center;
 }

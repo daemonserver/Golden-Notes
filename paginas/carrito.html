@@ -2,7 +2,7 @@
 <html lang="es" data-tema="claro">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="description" content="Tu carrito de Golden Notes: ajusta tamaños y cantidades, genera una factura en PDF y cierra tu pedido por WhatsApp.">
   <meta name="theme-color" content="#c9a227">
   <title>Mi carrito — Golden Notes</title>
@@ -130,7 +130,12 @@
 
             <div class="resumen__acciones">
               <button type="button" class="btn btn--oro btn--ancho" data-factura>
-                📄 Compartir o descargar cotización PDF
+                <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5"/><path d="M5 13v5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5"/></svg>
+                Compartir cotización PDF
+              </button>
+              <button type="button" class="btn btn--contorno btn--ancho" data-descargar>
+                <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v12m0 0 4.5-4.5M12 16l-4.5-4.5"/><path d="M5 19h14"/></svg>
+                Descargar PDF
               </button>
               <button type="button" class="btn btn--contorno btn--ancho" data-whatsapp>
                 💬 Enviar pedido por WhatsApp

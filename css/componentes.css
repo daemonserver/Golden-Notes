@@ -22,6 +22,7 @@
   --btn-fondo: var(--oro);
   --btn-texto: #14161c;
   display: inline-flex;
+  min-height: 44px;
   align-items: center;
   justify-content: center;
   gap: 0.55rem;
@@ -255,11 +256,36 @@
   overflow: hidden;
   cursor: pointer;
   isolation: isolate;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 480px;
+  transition: transform var(--transicion), box-shadow var(--transicion),
+    background-color var(--transicion), border-color var(--transicion);
 }
 
-.tarjeta:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--sombra-elevada), inset 0 1px 0 var(--brillo);
+.tarjeta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.72), transparent 38%, rgba(255, 255, 255, 0.12));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.tarjeta:focus-visible {
+  outline: 2px solid var(--oro);
+  outline-offset: 4px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .tarjeta:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--sombra-elevada), inset 0 1px 0 var(--brillo);
+  }
 }
 
 .tarjeta__marco {
@@ -277,7 +303,14 @@
   transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.tarjeta:hover .tarjeta__img { transform: scale(1.07) translateY(-4px); }
+.tarjeta.cristal {
+  -webkit-backdrop-filter: saturate(145%) blur(8px);
+  backdrop-filter: saturate(145%) blur(8px);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .tarjeta:hover .tarjeta__img { transform: scale(1.07) translateY(-4px); }
+}
 
 .tarjeta__genero {
   position: absolute;
@@ -314,8 +347,8 @@
   top: 0.7rem;
   right: 0.7rem;
   z-index: 2;
-  width: 38px;
-  height: 38px;
+  width: 44px;
+  height: 44px;
   display: grid;
   place-items: center;
   border-radius: 50%;
@@ -330,7 +363,8 @@
   transform: scale(0.85);
 }
 
-.tarjeta:hover .tarjeta__rapida {
+.tarjeta:hover .tarjeta__rapida,
+.tarjeta:focus-within .tarjeta__rapida {
   opacity: 1;
   transform: scale(1);
 }
@@ -353,6 +387,11 @@
   gap: 0.55rem;
   padding: 1.05rem 1.2rem 1.3rem;
   flex: 1;
+}
+
+.tarjeta__nombre {
+  overflow-wrap: anywhere;
+  text-wrap: balance;
 }
 
 .tarjeta__disenador {
@@ -395,7 +434,7 @@
 
 .rejilla-perfumes {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 228px), 1fr));
   gap: clamp(1rem, 2.5vw, 1.7rem);
 }
 
@@ -923,7 +962,7 @@
 
 .resumen {
   position: sticky;
-  top: calc(var(--altura-header) + 1rem);
+  top: calc(var(--altura-header-segura) + 1rem);
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -1110,6 +1149,7 @@
 }
 
 .chip {
+  min-height: 44px;
   padding: 0.45rem 1rem;
   border-radius: 99px;
   border: 1px solid var(--cristal-borde);
@@ -1117,8 +1157,8 @@
   font-size: 0.88rem;
   font-weight: 500;
   color: var(--texto-suave);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
   transition: all var(--transicion);
 }
 
@@ -1143,6 +1183,79 @@
   margin-bottom: 1.2rem;
   font-size: 0.95rem;
   color: var(--texto-suave);
+}
+
+/* Fallbacks para navegadores sin blur y preferencias de transparencia baja. */
+@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  .cristal,
+  .filtros,
+  .linea,
+  .resumen,
+  .vacio,
+  .nivel,
+  .nota,
+  .pregunta,
+  .menu-movil,
+  .pie,
+  .tarjeta__rapida,
+  .etiqueta--cristal,
+  .chip,
+  .buscador input {
+    background: var(--cristal-fuerte);
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .cristal,
+  .tarjeta.cristal,
+  .filtros,
+  .linea,
+  .resumen,
+  .vacio,
+  .nivel,
+  .nota,
+  .pregunta,
+  .menu-movil,
+  .pie,
+  .tarjeta__rapida,
+  .etiqueta--cristal,
+  .chip,
+  .buscador input {
+    background: #fbf9f4;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  [data-tema="oscuro"] .cristal,
+  [data-tema="oscuro"] .tarjeta.cristal,
+  [data-tema="oscuro"] .filtros,
+  [data-tema="oscuro"] .linea,
+  [data-tema="oscuro"] .resumen,
+  [data-tema="oscuro"] .vacio,
+  [data-tema="oscuro"] .nivel,
+  [data-tema="oscuro"] .nota,
+  [data-tema="oscuro"] .pregunta,
+  [data-tema="oscuro"] .menu-movil,
+  [data-tema="oscuro"] .pie,
+  [data-tema="oscuro"] .tarjeta__rapida,
+  [data-tema="oscuro"] .etiqueta--cristal,
+  [data-tema="oscuro"] .chip,
+  [data-tema="oscuro"] .buscador input {
+    background: #171a22;
+  }
+
+  .tarjeta::before { display: none; }
+}
+
+@media (max-width: 480px) {
+  .filtros { padding: 1rem; }
+  .filtros__fila { gap: 0.65rem; }
+  .filtros__fila .campo { flex-basis: 100%; }
+  .resultados__info { align-items: flex-start; flex-direction: column; }
+  .tarjeta__cuerpo { padding: 0.9rem; }
+  .tarjeta__nombre { font-size: 1.2rem; }
+  .tarjeta__pie { align-items: stretch; flex-direction: column; }
+  .tarjeta__pie .btn { width: 100%; }
 }
 
 /* -------------------------------- Tarjeta diseñador ----------------------- */

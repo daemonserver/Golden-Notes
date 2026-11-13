@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  IMPORTANTE: reemplaza "daemonserver" por tu usuario de GitHub (o el dominio propio)
-  antes de publicar. Ejemplo: https://hectoc.github.io/golden-notes/
--->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://daemonserver.github.io/golden-notes/</loc>
