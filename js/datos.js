@@ -50,6 +50,7 @@ const PRECIOS_BASE = { 50: 100, 100: 150 };
 ------------------------------------------------------------------------- */
 
 const PERFUMES = [
+/* =========================== SEPARADOR HOMBRES ================================== */
   {
     id: "1-million-absolutely-gold",
     noDisponible: false,
@@ -798,7 +799,41 @@ const PERFUMES = [
     },
     precios: { 50: 100, 100: 150 },
   },
- /* =========================== UNISEX ================================== */
+  {
+    noDisponible: false,
+    id: "hugo-red",
+    nombre: "Hugo Red",
+    disenador: "Hugo Boss",
+    genero: "hombre",
+    familia: "Amaderado Aromático",
+    imagen: "img/hombres/hugo-red_hugo-boss_m.png",
+    acordes: ["Aromático", "Cítrico", "Afrutados"],
+    notas: ["Marino", "Amaderado", "Fresco", "Almizclado", "Dulce", "Acuático", "Atalcado"],
+    piramide: {
+      salida: ["Piña", "Melón", "Bergamota", "Toronja", "Manzana verde"],
+      corazon: ["Notas marinas", "Jazmín", "Cardamomo", "Neroli"],
+      fondo: ["Vetiver", "Almizcle blanco", "Cedro", "Gamuza", "Ámbar"],
+    },
+    precios: { 50: 100, 100: 150 },
+  },
+  {
+    noDisponible: false,
+    id: "born-in-roma",
+    nombre: "Uomo Born In Roma",
+    disenador: "Valentino",
+    genero: "hombre",
+    familia: "Amaderado Aromático",
+    imagen: "img/hombres/uomo-born-in-roma_valentino_m.png",
+    acordes: ["Salvia", "Jengibre", "Notas verdes"],
+    notas: ["Vetiver", "Maderas", "Notas minerales"],
+    piramide: {
+      salida: ["Notas minerales", "Hojas de violeta", "Sal"],
+      corazon: ["Jengibre", "Salvia"],
+      fondo: ["Notas amaderadas", "Vetiver"],
+    },
+    precios: { 50: 100, 100: 150 },
+  },
+ /* =========================== SEPARADOR UNISEX ================================== */
    {
     noDisponible: false,
     id: "swiss-army",
@@ -833,7 +868,7 @@ const PERFUMES = [
     },
     precios: { 50: 100, 100: 150 },
   },
-  /* =========================== MUJERES ================================== */
+  /* =========================== SEPARADOR MUJERES ================================== */
   {
     noDisponible: false,
     id: "212-women",
@@ -1480,8 +1515,42 @@ const PERFUMES = [
     },
     precios: { 50: 100, 100: 150 },
   },
+ {
+    noDisponible: false,
+    id: "very-good-girl_ch",
+    nombre: "Very Good Girl",
+    disenador: "Carolina Herrera",
+    genero: "mujer",
+    familia: "Ámbar Floral",
+    imagen: "img/mujeres/very-good-girl_carolina-herrera_w.png",
+    acordes: ["Rosa", "Vainilla", "Frutos tropicales"],
+    notas: ["Vetiver", "Frutos rojos"],
+    piramide: {
+      salida: ["Lichi", "Grosella roja"],
+      corazon: ["Rosa"],
+      fondo: ["Vainilla", "Vetiver"],
+    },
+    precios: { 50: 100, 100: 150 },
+  },
+ {
+    noDisponible: false,
+    id: "very-good-girl_glam-ch",
+    nombre: "Very Good Girl Glam",
+    disenador: "Carolina Herrera",
+    genero: "mujer",
+    familia: "Floral Frutal Gourmand",
+    imagen: "img/mujeres/very-good-girl-glam_carolina-herrera_w.png",
+    acordes: ["Vainilla", "Almendra y frutos secos", "Frutos rojos"],
+    notas: ["Rosa", "Flores blancas", "Vetiver"],
+    piramide: {
+      salida: ["Cereza ácida", "Almendra amarga"],
+      corazon: ["Rosa", "Azucena"],
+      fondo: ["Vainilla bourbon", "Vetiver"],
+    },
+    precios: { 50: 100, 100: 150 },
+  },
 ];
 
 /* Perfumes destacados en la portada (basta con listar sus id). */
-const DESTACADOS = ["good-girl_ch", "killer-queen", "toy-boy", "playboy-vip-for-him"];
+const DESTACADOS = ["very-good-girl_glam-ch", "born-in-roma", "toy-boy", "playboy-vip-for-him"];
 
